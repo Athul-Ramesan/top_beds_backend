@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { IDependencies } from "../../../application/interfaces/IDependencies";
 import { controllers } from "../../../presentation/controllers";
+import { authMiddleware } from "../../../_lib/middleware/auth";
+// import {isUserCheck} from 'topbeds-package'
+import { isUserCheck } from "../../../_lib/middleware/isUserCheck";
 
 export const routes = (dependencies: IDependencies) => {
     console.log("___________inside routes");
@@ -28,6 +31,7 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/verify-account')
         .post(verifyOtp)  
     router.route('/get-user-data')
-        .get(getUserData)      
+        .get(isUserCheck,getUserData)      
     return router
 }
+

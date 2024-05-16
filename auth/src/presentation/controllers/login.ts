@@ -3,6 +3,7 @@ import { IDependencies } from "../../application/interfaces/IDependencies";
 import { loginValidation } from "../../_lib/validation";
 import { generateAccesstoken } from "../../_lib/jwt/generateAccesstoken";
 import { generateRefreshToken } from "../../_lib/jwt/generateRefreshToken";
+import { customError } from "topbeds-package";
 
 
 export const loginController = (dependencies: IDependencies) => {
@@ -41,7 +42,9 @@ export const loginController = (dependencies: IDependencies) => {
             res.status(201).json({ status: "ok", message: "User Logged In Successfully!", data: result });
         } catch (error: any) {
             console.log(error.message);
-            res.status(400).json({ status: "error", message: error.message });
+            // res.status(400).json({ status: "error", message: error.message });
+             const err = new customError(error.message,400);
+            next(err)
         }
 
     }

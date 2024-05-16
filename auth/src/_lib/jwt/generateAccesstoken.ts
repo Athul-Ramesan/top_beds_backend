@@ -10,11 +10,11 @@ export const generateAccesstoken = (
     return jwt.sign(
         payload,
         String(process.env.ACCESS_TOKEN_SECRET),
-        {expiresIn:'1h'}
+        {expiresIn:'24hr'}
     );
 };
 
 export const generateAccesstokenForEmailVerification =( email: string) =>{
    let payload={email}
-   return jwt.sign(payload,String(process.env.ACCESS_TOKEN_SECRET),{expiresIn:"5min"})
+   return jwt.sign(payload,String(process.env.ACCESS_TOKEN_SECRET),{expiresIn:"24hr"})
 }

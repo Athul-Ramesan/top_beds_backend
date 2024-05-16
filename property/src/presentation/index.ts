@@ -2,9 +2,11 @@ import express, { Application, Request, Response } from "express"
 import { config } from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-import { dependencies } from "../_boot/dependencies"
+import { routes } from "../infrastructure/routes"
+import { dependencies } from "@/_boot/dependencies"
+import bodyParser from 'body-parser'
 // import { routes } from "../infrastructure/database/routes"
-// import { dependencies } from "../_boot/dependencies"
+
 
 
 config()
@@ -18,17 +20,23 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json(
+    { limit: '100mb' }
+));
+app.use(bodyParser.json(
+    {limit:"100mb"}
+))
+app.use(express.urlencoded({
+    limit: "100mb",
+    extended: true
+}))
 app.use(cookieParser());
 
-app.get('/',(req:Request, res:Response)=>{
-    res.status(200).json({message:"<< User service is running ! >>"})
-})
-// app.use("/user", routes(dependencies))
+app.use("/", routes(dependencies))
+
 
 app.listen(PORT, () => {
-    console.log(`<< User service connected to Port ${PORT} >>`);
+    console.log(`<< Property service connected to Port ${PORT} >>`);
 })
 
 export default app

@@ -21,7 +21,7 @@ export const loginRepository =async (data:UserLoginEntity):Promise<UserEntity|nu
         }
         
     } catch (error:any) {
-        console.log(error);
+        console.log(error,'😔😔😔😔 error inside login repository');
         throw new Error(error.message || 'Error on user login repo');
     }
 }

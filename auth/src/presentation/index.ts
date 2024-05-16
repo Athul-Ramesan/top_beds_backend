@@ -1,9 +1,11 @@
-import express, { Application, Request, Response } from "express"
+import express, { Application, ErrorRequestHandler, NextFunction, Request, Response } from "express"
 import { config } from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { routes } from "../infrastructure/database/routes"
 import { dependencies } from "../_boot/dependencies"
+import { customError } from "topbeds-package"
+import errorHandler from "../_lib/middleware/errorHandle"
 
 
 config()
@@ -24,10 +26,20 @@ app.use(cookieParser());
 // app.get('/',(req:Request, res:Response)=>{
 //     res.status(200).json({message:"<< Auth service is running ! >>"})
 // })
-app.use("/auth", routes(dependencies))
+app.use("/", routes(dependencies))
+app.all('*',(req:Request,res:Response, next:NextFunction)=>{
+    // res.status(404).json({
+    //     status:"fail",
+    //     message:`Can't find ${req.originalUrl} on this server`
+    // })
+    const err = new customError(`Can't find ${req.originalUrl} on this server`,404)
+    next(err)
+})
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
-    console.log(`<< User service connected to Port ${PORT} >>`);
+    console.log(`<< Auth service connected to Port ${PORT} >>`);
 })
 
 export default app
