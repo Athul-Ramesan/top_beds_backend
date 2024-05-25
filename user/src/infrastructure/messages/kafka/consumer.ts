@@ -14,7 +14,10 @@ export const runConsumer = async () => {
         const subscriber: any = createSubscriber()
 
         await consumer.run({
-            eachMessage: async ({message}) => {
+            eachMessage: async ({message,topic,partition}) => {
+                console.log("🚀 ~ eachMessage: ~ partition:", partition)
+                console.log("🚀 ~ eachMessage: ~ topic:", topic)
+                
                 const {key, value} = message;
                 const subscriberMethod = String(key)
                 const subscriberData = JSON.parse(String(value))

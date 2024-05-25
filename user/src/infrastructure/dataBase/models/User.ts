@@ -1,4 +1,4 @@
-import { Schema,model } from "mongoose";
+import { Schema,Types,model } from "mongoose";
 import { UserEntity } from "../../../domain/entities/UserEntity";
 
 const userSchema = new Schema({
@@ -9,6 +9,21 @@ const userSchema = new Schema({
     lastName:{
         type:String,
         required:true
+    },
+    dateOfBirth: {
+        type: Date
+    },
+    phone: {
+        type: String
+    },
+    address: {
+        type: {
+            street: { type: String },
+            city: { type: String },
+            state: { type: String },
+            zip: { type: String },
+            phone: {type:String}
+        }
     },
     // username:{
     //     type:String,

@@ -7,7 +7,9 @@ import { isUserCheck, requireHost } from "topbeds-package"
 
 export const routes = (dependencies: IDependencies) => {
     const { createProperty,
-        getAllProperties
+        getAllProperties,
+        deleteProperty,
+        getHostProperties
      } = controllers(dependencies)
     const router = Router()
 
@@ -18,6 +20,10 @@ export const routes = (dependencies: IDependencies) => {
         )
     router.route('/get-all-properties')
         .get(getAllProperties)
+    router.route('/delete-property/:id')
+        .delete(isUserCheck,deleteProperty)
+    router.route('/get-host-properties/:hostId')    
+        .get(getHostProperties)
     return router
 };
 

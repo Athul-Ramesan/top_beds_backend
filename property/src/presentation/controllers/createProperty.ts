@@ -3,13 +3,13 @@ import { validatePropertyData } from "@/lib/validation/validatePropertyDetails";
 import cloudinary from "@/utils/cloudinary";
 import { NextFunction, Request, Response } from "express";
 
+
 export const createPropertyController = (dependencies: IDependencies) => {
     
     const { useCases: { createPropertyUseCase } } = dependencies
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
            
-            console.log(req.body,"🥶🥶🥶🥶🥶🥶🥶🥶🥶");
             
             
             const images = req.body.images

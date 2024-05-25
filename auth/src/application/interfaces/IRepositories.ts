@@ -6,5 +6,5 @@ export interface IRepositories{
     loginRepository:(data:UserLoginEntity)=>Promise<UserEntity |null>;  //sign up repository
     sendOtpRepository:(data:verificationEntity)=>Promise<verificationEntity|null>;
     verifyOtpRepository:(data:verificationEntity)=>Promise<verificationEntity| null>;
-    getUserDataRepository:(data:ObjectId) => Promise<UserEntity | null> ; 
+    getUserDataRepository:(data:string) => Promise<UserEntity | null> ; 
 }

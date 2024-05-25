@@ -1,8 +1,10 @@
-import express, { Application, Request, Response } from "express"
+import express, { Application, NextFunction, Request, Response } from "express"
 import { config } from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { dependencies } from "../_boot/dependencies"
+import { routes } from "@/infrastructure/routes"
+import { NotFoundError, errorHandler } from "topbeds-package"
 // import { routes } from "../infrastructure/database/routes"
 // import { dependencies } from "../_boot/dependencies"
 
@@ -22,10 +24,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
 
-app.get('/',(req:Request, res:Response)=>{
-    res.status(200).json({message:"<< User service is running ! >>"})
+// app.get('/',(req:Request, res:Response)=>{
+//     res.status(200).json({message:"<< User service is running ! >>"})
+// })
+app.use("/", routes(dependencies))
+
+app.all("*", (req:Request,res:Response,next:NextFunction)=>{
+
+    next(new NotFoundError())
 })
-// app.use("/user", routes(dependencies))
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`<< User service connected to Port ${PORT} >>`);

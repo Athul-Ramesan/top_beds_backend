@@ -5,7 +5,7 @@ export const getUserDataUseCase = (dependencies: IDependencies) => {
     const { repositories: { getUserDataRepository } } = dependencies
 
     return {
-        execute: (data: ObjectId) => {
+        execute: (data: string) => {
             return getUserDataRepository(data)
         }
     }

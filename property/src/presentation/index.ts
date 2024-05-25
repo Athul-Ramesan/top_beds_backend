@@ -1,10 +1,11 @@
-import express, { Application, Request, Response } from "express"
+import express, { Application, NextFunction, Request, Response } from "express"
 import { config } from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { routes } from "../infrastructure/routes"
 import { dependencies } from "@/_boot/dependencies"
 import bodyParser from 'body-parser'
+import {NotFoundError, errorHandler} from 'topbeds-package'
 // import { routes } from "../infrastructure/database/routes"
 
 
@@ -33,7 +34,12 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 
 app.use("/", routes(dependencies))
+app.all("*", (req:Request,res:Response,next:NextFunction)=>{
 
+    next(new NotFoundError())
+})
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`<< Property service connected to Port ${PORT} >>`);

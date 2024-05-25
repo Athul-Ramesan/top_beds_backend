@@ -17,7 +17,31 @@ const PropertySchema: Schema = new Schema(
         },
       },
       hostId: {
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        ref:'User'
+      },
+      reviews:[
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref:"Review"
+        }
+      ],
+      availability: [
+        {
+          startDate: {
+            type: Date,
+          },
+          endDate: {
+            type: Date,
+          },
+          available: {
+            type: Boolean,
+          },
+        },
+      ],
+      active : {
+        type: Boolean,
+        default: false
       },
       address:{
         type:String
@@ -31,6 +55,7 @@ const PropertySchema: Schema = new Schema(
       maxGuests: { type: Number },
       host: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     },
+    
     { timestamps: true }
   );
 

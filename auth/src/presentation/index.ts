@@ -4,7 +4,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import { routes } from "../infrastructure/database/routes"
 import { dependencies } from "../_boot/dependencies"
-import { customError } from "topbeds-package"
+import { NotFoundError, customError } from "topbeds-package"
 import errorHandler from "../_lib/middleware/errorHandle"
 
 
@@ -27,13 +27,9 @@ app.use(cookieParser());
 //     res.status(200).json({message:"<< Auth service is running ! >>"})
 // })
 app.use("/", routes(dependencies))
-app.all('*',(req:Request,res:Response, next:NextFunction)=>{
-    // res.status(404).json({
-    //     status:"fail",
-    //     message:`Can't find ${req.originalUrl} on this server`
-    // })
-    const err = new customError(`Can't find ${req.originalUrl} on this server`,404)
-    next(err)
+app.all("*", (req:Request,res:Response,next:NextFunction)=>{
+
+    next(new NotFoundError())
 })
 
 app.use(errorHandler)

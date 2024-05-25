@@ -16,6 +16,7 @@ import app from "@/presentation"
         //         addMatchAll: false,
         //       })
         // })
+
         
         (async()=>{
             try {
@@ -29,6 +30,7 @@ import app from "@/presentation"
             console.log(err);
             console.log('errror in kafka consumer');
         })
+        
     } catch (error:any) {
         console.log(error,"____failed to config user service")
     }finally{
@@ -38,3 +40,6 @@ import app from "@/presentation"
         })
     }
 })()
+
+
+

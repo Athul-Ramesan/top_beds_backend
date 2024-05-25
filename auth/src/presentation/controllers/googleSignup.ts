@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../application/interfaces/IDependencies";
 import { generateRefreshToken } from "../../_lib/jwt/generateRefreshToken";
 import { generateAccesstoken } from "../../_lib/jwt/generateAccesstoken";
+import userCreatedProducer from "../../infrastructure/database/messages/kafka/producers/userCreatedProducer";
 
 export const googleSignupOrLogin = (dependencies: IDependencies) => {
 
@@ -15,6 +16,8 @@ export const googleSignupOrLogin = (dependencies: IDependencies) => {
             if (!result) {
                 throw new Error("User creation failed");
             }
+            
+            userCreatedProducer(result)
             const accessToken = generateAccesstoken({
                 _id: String(result._id),
                 email: String(result.email),

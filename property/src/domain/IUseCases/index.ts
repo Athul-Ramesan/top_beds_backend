@@ -1,2 +1,5 @@
 export * from './ICreatePropertyUseCase'
 export * from './IGetAllPropertyUseCase'
+export * from './IDeletePropertUseCase'
+export * from './IGetHostIdUseCase'
+export * from './IGetHostProperties'

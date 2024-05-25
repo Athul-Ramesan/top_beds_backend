@@ -8,12 +8,13 @@ register({
 
 import app from "@/presentation"
 import dbConnection from "@/_boot/dbConnection"
+import { runConsumer } from "./infrastructure/messages/kafka/consumer"
 (async()=>{
     try {
         console.log('its here server');
          app
-        
-        dbConnection()
+        await runConsumer()
+        await dbConnection()
     }catch(error:any){
         console.error(error,"_____failed to config property service");
         
@@ -24,3 +25,4 @@ import dbConnection from "@/_boot/dbConnection"
           });
     }
 })()
+

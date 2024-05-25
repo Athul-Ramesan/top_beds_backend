@@ -16,6 +16,15 @@ export default async (
                         value: JSON.stringify(data)
                     }
                 ]
+            },
+            {
+                topic: 'to-property-service',
+                messages:[
+                    {
+                        key:'userCreated',
+                        value:JSON.stringify(data)
+                    }
+                ]
             }
         ]
 

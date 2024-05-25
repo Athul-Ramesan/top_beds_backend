@@ -2,7 +2,7 @@ import { ObjectId } from "mongoose";
 import { UserEntity } from "../../../domain/entities";
 import { User } from "../models";
 
-export const getUserDataRepository = async (data: ObjectId): Promise<UserEntity | null> => {
+export const getUserDataRepository = async (data: string): Promise<UserEntity | null> => {
     console.log("🚀 ~ getUserDataRepository ~ data:", data)
     
     
