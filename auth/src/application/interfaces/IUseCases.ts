@@ -1,4 +1,4 @@
-import { IGetUserDataUseCase, ILoginUseCase, ISignupUseCase, IVerifyAccountUseCase } from "../../domain/useCaseInterfaces";
+import { IEmailVerificationUseCase, IGetUserDataUseCase, ILoginUseCase, ISignupUseCase, IVerifyAccountUseCase, IVerifyResetTokenUseCase } from "../../domain/useCaseInterfaces";
 import { IDependencies } from "./IDependencies";
 
 export interface IUseCases{
@@ -8,4 +8,6 @@ export interface IUseCases{
     sendOtpUseCase:(dependencies:IDependencies)=>IVerifyAccountUseCase;
     verifyOtpUseCase:(dependencies:IDependencies)=> IVerifyAccountUseCase;
     getUserDataUseCase: (dependencies:IDependencies)=>IGetUserDataUseCase;
+    emailVerificationUseCase : (dependencies:IDependencies) =>IEmailVerificationUseCase;
+    verifyResetTokenUseCase : ( dependencies:IDependencies) => IVerifyResetTokenUseCase
 }

@@ -56,7 +56,9 @@ const userSchema = new Schema({
     isGoogle:{
         type:Boolean,
         default: false
-    }
+    },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
 },{
     timestamps:true
 })

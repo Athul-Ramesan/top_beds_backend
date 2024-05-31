@@ -4,8 +4,13 @@ export const getAllPropertyUseCase = (dependencies:IDependencies)=>{
         const {repositories: {getAllPropertyRepository}} = dependencies
 
         return {
-            execute:()=>{
-                return getAllPropertyRepository()
+            execute:async(data:{
+                page?: number;
+                limit?: number;
+                category?: string;
+                search?: string;
+            })=>{
+                return await getAllPropertyRepository(data)
             }
         }
 }

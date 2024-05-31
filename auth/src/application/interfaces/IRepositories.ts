@@ -7,4 +7,6 @@ export interface IRepositories{
     sendOtpRepository:(data:verificationEntity)=>Promise<verificationEntity|null>;
     verifyOtpRepository:(data:verificationEntity)=>Promise<verificationEntity| null>;
     getUserDataRepository:(data:string) => Promise<UserEntity | null> ; 
+    emailVerification :(data:string) => Promise<Boolean | null>
+    verifyResetToken: (token:string,password:string) =>Promise<Boolean |null>
 }

@@ -22,5 +22,7 @@ export interface UserEntity{
     gender?:Gender,
     isBlocked?:boolean,
     isGoogle?:boolean,
-    picture?:string 
+    picture?:string ,
+    resetPasswordToken?: string;
+    resetPasswordExpires?: Date;
 }

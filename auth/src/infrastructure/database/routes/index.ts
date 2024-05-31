@@ -15,6 +15,8 @@ export const routes = (dependencies: IDependencies) => {
         sendOtp,
         verifyOtp,
         getUserData,
+        forgotPassword,
+        resetPassword
     } = controllers(dependencies);
 
     const router = Router();
@@ -32,7 +34,11 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/verify-account')
         .post(verifyOtp)  
     router.route('/get-user-data')
-        .get(isUserCheck,getUserData)      
+        .get(isUserCheck,getUserData)   
+    router.route('/forgot-password')  
+        .post(forgotPassword)     
+    router.route('/reset-password/:token')
+        .post(resetPassword)
     return router
 }
 
