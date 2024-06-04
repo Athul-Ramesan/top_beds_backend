@@ -6,3 +6,6 @@ export * from "./deleteProperty"
 export * from "./getHostId"
 export * from './createUser'
 export * from './getHostProperties'
+export * from './EditProperty/addNewPhotos'
+export * from  './EditProperty/updateProperty'
+export * from './deletePropertyPhoto'

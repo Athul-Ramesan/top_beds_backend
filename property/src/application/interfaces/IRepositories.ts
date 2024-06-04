@@ -1,3 +1,4 @@
+import { IUpdatePropertyEntity } from "@/domain/entities";
 import { IProperty } from "@/domain/entities/propertyEntity";
 
 export interface IRepositories {
@@ -12,4 +13,7 @@ export interface IRepositories {
     deletePropertyRepository: (data: string) => Promise<Boolean>
     getHostIdRepository: (data: string) => string
     getHostPropertiesRepository: (hostId: string) => Promise<IProperty[]>;
+    addNewPhotosRepository : (propertyId:string, images:string[]) => Promise<IProperty>;
+    updatePropertyRepository: (propertyId:string,data:IUpdatePropertyEntity) => Promise<IProperty>
+    deletePropertyPhotoRepository: (propertyId:string, image:string) => Promise<IProperty>
 }

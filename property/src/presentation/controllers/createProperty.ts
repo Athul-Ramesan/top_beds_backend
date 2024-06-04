@@ -1,7 +1,8 @@
 import { IDependencies } from "@/application/interfaces/IDependencies";
 import { validatePropertyData } from "@/lib/validation/validatePropertyDetails";
-import cloudinary from "@/utils/cloudinary";
+import { uploadMultipleImagesToCloudinary } from "@/utils/cloudinary/uploadImages";
 import { NextFunction, Request, Response } from "express";
+import { customError } from "topbeds-package";
 
 
 export const createPropertyController = (dependencies: IDependencies) => {
@@ -16,18 +17,10 @@ export const createPropertyController = (dependencies: IDependencies) => {
             console.log("🚀 ~ return ~ images:", images)
 
             if (!images || images.length === 0) {
-                return res.status(400).json({ message: 'No images provided' });
+                throw new customError('No images provided',400)
             }
 
-            const cloudinaryUrls = await Promise.all(
-                images.map(async (image:string) => {
-                    
-                    const cloudinary_res = await cloudinary.uploader.upload(image,{
-                        folder: '/TopBeds/properties'
-                    })
-                    return cloudinary_res.secure_url
-                })
-            )
+            const cloudinaryUrls = await uploadMultipleImagesToCloudinary(images)
 
             console.log("🚀 ~ return ~ cloudinaryUrls:", cloudinaryUrls)
             const hostId = req.user?._id
@@ -35,7 +28,7 @@ export const createPropertyController = (dependencies: IDependencies) => {
             
             const {value, error} = validatePropertyData.validate(propertyData)
             if(error){
-                throw new Error(error.message)
+                throw new customError(error.message,400)
             }
 
             const property = await createPropertyUseCase(dependencies).execute(value)
@@ -46,10 +39,7 @@ export const createPropertyController = (dependencies: IDependencies) => {
             
 
         } catch (error: any) {
-            console.log("🚀 ~ file: createPropertyController.ts ~ line 21 ~ error", error)
-
-            res.status(400).json(error.message)
+            next(error)
         }
-
     }
 }

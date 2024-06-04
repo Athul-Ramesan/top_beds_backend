@@ -3,6 +3,7 @@ import { connect } from "mongoose";
 export default async () => {
     config()
     try {
+        console.log('inside mongoose connect')
         await connect(String(process.env.MONGO_URI).trim(), 
         { 
             serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
@@ -15,3 +16,5 @@ export default async () => {
         process.exit(1)
     }
 }
+
+

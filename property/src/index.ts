@@ -12,9 +12,9 @@ import { runConsumer } from "./infrastructure/messages/kafka/consumer"
 (async()=>{
     try {
         console.log('its here server');
-         app
-        await runConsumer()
+        app
         await dbConnection()
+        await runConsumer()
     }catch(error:any){
         console.error(error,"_____failed to config property service");
         
@@ -25,4 +25,5 @@ import { runConsumer } from "./infrastructure/messages/kafka/consumer"
           });
     }
 })()
+
 

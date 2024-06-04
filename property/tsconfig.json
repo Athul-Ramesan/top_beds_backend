@@ -12,6 +12,6 @@
       "@/*": ["*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/infrastructure/database/repositories/EditProperty/updateProperty.ts"],
   "exclude": ["node_modules"]
 }
