@@ -1,34 +1,52 @@
 import { IDependencies } from "@/application/interfaces/IDependencies";
+import { PropertyQueryParams } from "@/domain/entities/IFilterOption";
 import { getTotalPage } from "@/lib/getTotalPage";
 import { NextFunction, Request, Response } from "express";
 
-export const getAllProperties = (dependencies:IDependencies)=>{
+export const getAllProperties = (dependencies: IDependencies) => {
 
-    const {useCases:{getAllPropertyUseCase}} = dependencies
-    
+    const { useCases: { getAllPropertyUseCase } } = dependencies
+
     return async (req
-        : Request, res: Response, next: NextFunction) =>{
+        : Request<{}, {}, {}, PropertyQueryParams>, res: Response, next: NextFunction) => {
 
 
         try {
+            console.log("🚀😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️ ~ getAllProperties ~ page:", req.query)
 
             const page = Number(req.query?.page)
             const limit = Number(req.query?.limit)
-            const category = String(req.query?.category)
+            const { filterOptions } = req.query
             const search = String(req.query?.search)
+            const sort = String(req.query.sort)
+            console.log("🚀 ~ getAllProperties ~ filterOptions:", filterOptions)
+
+            const category = filterOptions?.category;
+            const location = filterOptions?.location;
+            const guestCount = filterOptions?.guestCount;
+            const priceRange = filterOptions?.priceRange;
 
             const properties = await getAllPropertyUseCase(dependencies).execute(
-                {page,limit,category,search}
+                {
+                    page,
+                    limit,
+                    category,
+                    location,
+                    guestCount,
+                    priceRange,
+                    search,
+                    sort
+                }
             )
             const totalItems = await getTotalPage()
-            
+
             res.status(201).json({
-                status:"success",
-                data:properties,
-                totalItems:totalItems
+                status: "success",
+                data: properties,
+                totalItems: totalItems
             })
 
-        } catch (error:any) {
+        } catch (error: any) {
             console.log("🚀 ~ return ~ error:", error)
             res.status(400).json(error.message)
         }

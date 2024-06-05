@@ -7,8 +7,11 @@ export interface IRepositories {
         data: {
             page?: number;
             limit?: number;
-            category?: string;
-            search?: string;
+            category?: string,
+            priceRange?: string,
+            location?: string,
+            guestCount?: string,
+            sort?:string
         }) => Promise<IProperty[]>;
     deletePropertyRepository: (data: string) => Promise<Boolean>
     getHostIdRepository: (data: string) => string
