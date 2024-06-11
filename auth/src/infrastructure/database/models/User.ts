@@ -57,6 +57,9 @@ const userSchema = new Schema({
         type:Boolean,
         default: false
     },
+    profileImage:{
+        type:String
+    },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
 },{

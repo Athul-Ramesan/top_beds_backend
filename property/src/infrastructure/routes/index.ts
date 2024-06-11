@@ -32,7 +32,8 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/update-property/:propertyId')
         .post(updateProperty)    
     router.route('/delete-photo')
-            .delete(deletePropertyPhoto)    
+            .delete(deletePropertyPhoto)   
+             
     return router
 };
 

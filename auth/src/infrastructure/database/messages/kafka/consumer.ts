@@ -28,6 +28,8 @@ export const runConsumer = async ()=>{
                     } catch (error:any) {
                         throw new Error(error?.message);
                     }
+                }else{
+                    await subscriber[subscriberMethod](subscriberData)
                 }
             }
         })

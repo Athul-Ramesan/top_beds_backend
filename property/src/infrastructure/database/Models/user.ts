@@ -56,7 +56,11 @@ const userSchema = new Schema({
     isGoogle:{
         type:Boolean,
         default: false
-    }
+    },
+    profileImage:{
+        type:String
+    },
+  
 },{
     timestamps:true
 })

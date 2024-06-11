@@ -1,7 +1,9 @@
 import { hostAddressAddedConsumer } from "./consumers/hostAddressAddedConsumer"
+import { profileImageUpdatedConsumer } from "./consumers/profileImageUpdatedConsumer"
 
 export const createSubscriber = ()=>{
     return {
-        becomeHost: hostAddressAddedConsumer
+        becomeHost: hostAddressAddedConsumer,
+        profileImageUpdate: profileImageUpdatedConsumer
     }
 }

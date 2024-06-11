@@ -17,8 +17,8 @@ const PropertySchema: Schema = new Schema(
         },
       },
       hostId: {
-        type: mongoose.Types.ObjectId,
-        ref:'User'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user' // Referring to the User model
       },
       reviews:[
         {

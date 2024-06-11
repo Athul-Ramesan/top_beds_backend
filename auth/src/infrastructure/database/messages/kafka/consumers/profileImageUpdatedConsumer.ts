@@ -1,0 +1,19 @@
+import { IAddress } from "../../../../../domain/entities/IAddress";
+import { User } from "../../../models";
+import { updateProfileImage } from "../../../repositories/user/updateProfileImage";
+
+interface profileImageUpdatedConsumerProps{
+    _id:string
+    image: string;
+}
+
+export const profileImageUpdatedConsumer =async (data:profileImageUpdatedConsumerProps) => {
+    console.log("🚀 ~ profileImageUpdatedConsumer ~ data:", data)
+    try {
+        const { _id, image } = data;
+        await updateProfileImage(_id,image)
+        
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
+}
