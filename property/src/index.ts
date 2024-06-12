@@ -16,7 +16,7 @@ import { runConsumer } from "./infrastructure/messages/kafka/consumer"
         await dbConnection()
         await runConsumer()
     }catch(error:any){
-        console.error(error,"_____failed to config property service");
+        console.error(error,"_____failed to config property service ");
         
     }finally{
         process.on("SIGINT", () => { 

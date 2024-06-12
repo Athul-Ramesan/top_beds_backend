@@ -26,4 +26,4 @@ jobs:
         with:
           context: ./api-gateway/
           push: true
-          tags: athulrameshan/topbeds-api-gateway:latest  
+          tags: athulrameshankv/topbeds-api-gateway:latest  

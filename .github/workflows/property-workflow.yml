@@ -26,4 +26,4 @@ jobs:
         with:
           context: ./property/
           push: true
-          tags: athulrameshan/topbeds-property-service:latest  
+          tags: athulrameshankv/topbeds-property-service:latest  

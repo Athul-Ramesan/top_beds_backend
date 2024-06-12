@@ -12,7 +12,7 @@ import app from "@/presentation"
     try {
          app
     }catch(error:any){
-        console.error(error,"_____failed to config gateway service");
+        console.error(error,"_____failed to config gateway service ");
         
     }finally{
         process.on("SIGINT", () => { 

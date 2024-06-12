@@ -10,7 +10,8 @@ RUN npm install -g typescript
 
 COPY . .
 
-RUN npm run build
+# RUN npm run build 
+# uncomment during hosting
 
 EXPOSE 3002
 
