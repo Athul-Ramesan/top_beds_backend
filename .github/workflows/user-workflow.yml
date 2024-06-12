@@ -1,10 +1,10 @@
-name: Build & Publish property service Docker image
+name: Build & Publish user service Docker image
 
 on:
   push:
     branches: ['main']
     paths:
-      -"property/**"
+      -"user/**"
     workflow_dispatch:
 
 jobs:
