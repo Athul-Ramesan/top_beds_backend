@@ -25,7 +25,6 @@ export const runConsumer = async () => {
                 const { _id, address } = subscriberData
                 console.log("🚀 ~ eachMessage:async ~ subscriberData:", subscriberData)
                 if (subscriberMethod === "becomeHost") {
-
                     try {
                         await subscriber[subscriberMethod](_id, address);
 

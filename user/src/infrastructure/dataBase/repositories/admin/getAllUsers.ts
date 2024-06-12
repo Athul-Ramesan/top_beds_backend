@@ -30,6 +30,7 @@ export const getAllUsersRepository = async(
         ];
     }
     const users = await User.find(query).skip(skip).limit(limit)
+    
     console.log("🚀 ~ users:", users)
     if(!users){
         throw new customError("No users found",404);
