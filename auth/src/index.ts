@@ -8,10 +8,10 @@ import app from "./presentation";
         await dbConnection()
         await runConsumer()
     }catch(error:any){
-        console.log(error,"_____failed to config auth service");
+        console.log(error,"_____failed to config auth-service");
     }finally{
         process.on("SIGINT", () => { 
-            console.log("\n\n server is shutting down")
+            console.log("\n server is shutting down")
             process.exit();  
           });
     }
