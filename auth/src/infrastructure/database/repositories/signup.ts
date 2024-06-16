@@ -5,22 +5,41 @@ import { User } from "../models";
 export const signupRepository = async (
     data: UserEntity
 ): Promise<UserEntity | null> => {
-    console.log("__________inside signup repository");
+    console.log(data,"__________inside signup repository");
 
         
-        // const existingUser = await User.findOne({ email: data.email });
+    try {
+            // const existingUser = await User.findOne({ email: data.email });
         // if (existingUser) {
         //     if(data.isGoogle){
         //         return existingUser
         //     }
         //     throw new Error("User already exist");
         // }
-        const hashedPassword = await hashPassword(String(data.password))
-        const newData :UserEntity = {
-            ...data,
-            password :hashedPassword
+        let newData :UserEntity={}
+          console.log("🚀 ~ newData:", newData)
+          
+        if(data.password){
+            const hashedPassword = await hashPassword(String(data.password))
+            console.log("🚀 ~ hashedPassword:", hashedPassword)
+             newData= {
+                ...data,
+                password :hashedPassword
+            }
+        }else{
+            newData = {
+                ...data
+            };
         }
+        console.log("🚀 ~ newData:", newData)
         const newUser = await User.create(newData)
-        return newUser
+        console.log("🚀 ~ newUser:", newUser)
 
+        
+        return newUser
+    } catch (error:any) {
+        console.log("🚀 ~ error:", error)
+        throw new Error(error)
+    }
 }
+

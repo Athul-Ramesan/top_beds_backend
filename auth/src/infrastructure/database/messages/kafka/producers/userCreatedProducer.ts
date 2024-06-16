@@ -2,7 +2,7 @@ import { producer } from "..";
 import { UserEntity } from "../../../../../domain/entities";
 
 export default async (
-    data:UserEntity
+    data:UserEntity | null
 )=>{
     try {
         console.log('before sending producer');

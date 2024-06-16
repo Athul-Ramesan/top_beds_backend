@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "node dist/index.js",
+    "start": "nodemon dist/index.js",
     "dev": "nodemon src/index.ts",
     "start:dev": "concurrently --kill-others-on-fail \"npm run watch\" \"npm run start\"",
     "lint": "eslint .",
@@ -26,7 +26,7 @@
     "kafkajs": "^2.2.4",
     "mongoose": "^8.3.2",
     "multer": "^1.4.5-lts.1",
-    "topbeds-package": "^1.1.5",
+    "topbeds-package": "^1.1.7",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {

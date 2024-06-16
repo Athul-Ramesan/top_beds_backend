@@ -33,6 +33,7 @@ export const runConsumer = async () => {
                     }
                 } else {
                     try {
+                        console.log('inside else of subscriber')
                         await subscriber[subscriberMethod](subscriberData)
                     } catch (error: any) {
                         throw new Error(error?.message);

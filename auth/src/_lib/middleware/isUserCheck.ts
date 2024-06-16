@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { ObjectId } from "mongoose";
 
 export interface IUserPayload {
-    _id: ObjectId;
+    _id: string;
     email: string;
     role: string;
 }

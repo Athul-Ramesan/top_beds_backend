@@ -18,7 +18,7 @@ export const emailVerification = async (email: string) => {
         user.save()
 
         await sendPasswordResetEmail(email,resetToken)
-        
+        return true
     } catch (error: any) {
         throw new Error(error);
     }

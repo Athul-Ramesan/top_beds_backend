@@ -31,8 +31,7 @@ const userSchema = new Schema({
     //     index:true
     // },
     password:{
-        type:String,
-        required:true
+        type:String
     },
     email:{
         type:String,
@@ -48,6 +47,10 @@ const userSchema = new Schema({
         type:String,
         enum:["user","host","admin"],
         default:"user"
+    },
+    hostStatus:{
+        type:String,
+        enum: ["accepted",'rejected','requested']
     },
     isBlocked: {
         type:Boolean,

@@ -31,8 +31,7 @@ const userSchema = new Schema({
     //     index:true
     // },
     password:{
-        type:String,
-        required:true
+        type:String
     },
     email:{
         type:String,
@@ -59,6 +58,10 @@ const userSchema = new Schema({
     },
     profileImage:{
         type:String
+    },
+    hostStatus:{
+        type:String,
+        enum: ["accepted",'rejected','requested'],
     },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },

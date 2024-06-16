@@ -10,8 +10,8 @@ export const googleSignupOrLogin = (dependencies: IDependencies) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { family_name: firstName, given_name: lastName, picture, email,isGoogle } = req.body;
-
-            const result = await googleSingupOrLoginUseCase(dependencies).execute({ firstName, lastName, picture, email,isGoogle})
+            const profileImage = picture
+            const result = await googleSingupOrLoginUseCase(dependencies).execute({ firstName, lastName, profileImage, email,isGoogle})
 
             if (!result) {
                 throw new Error("User creation failed");

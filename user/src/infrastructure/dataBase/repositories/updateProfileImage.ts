@@ -6,7 +6,6 @@ import { customError } from "topbeds-package"
 export const updateProfileImage =async (_id:string,image:string):
 Promise<UserEntity | null>=>{
     
-  
     const result = await User.findByIdAndUpdate(
         _id,
         {profileImage:image}

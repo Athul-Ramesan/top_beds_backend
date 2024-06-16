@@ -19,6 +19,7 @@ export interface UserEntity{
     email?:string,
     password?:string,
     role?:Role,
+    hostStatus?:string,
     gender?:Gender,
     isBlocked?:boolean,
     isGoogle?:boolean,

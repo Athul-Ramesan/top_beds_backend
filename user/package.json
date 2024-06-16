@@ -9,8 +9,9 @@
     "watch": "tsc --watch",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "start:dev": "concurrently --kill-others-on-fail \"npm run watch\" \"npm run start\""
+    "start:dev": "concurrently --kill-others-on-fail \"npm run watch\" \"npm run dev\""
   },
+  
   "author": "",
   "license": "ISC",
   "dependencies": {

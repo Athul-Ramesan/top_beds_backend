@@ -19,6 +19,7 @@ export interface IProperty{
         bathrooms: number;
         maxGuests: number;
         host: string;
+        category: string;
         createdAt: Date;
         updatedAt: Date;
         

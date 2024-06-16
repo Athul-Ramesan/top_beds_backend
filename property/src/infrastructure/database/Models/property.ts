@@ -6,15 +6,18 @@ const PropertySchema: Schema = new Schema(
     {
       title: { type: String },
       description: { type: String },
-      location: {
-        address: { type: String },
-        city: { type: String },
-        state: { type: String },
-        country: { type: String },
-        coordinates: {
-          lat: { type: Number },
-          lng: { type: Number },
-        },
+      // location: {
+      //   address: { type: String },
+      //   city: { type: String },
+      //   state: { type: String },
+      //   country: { type: String },
+      //   coordinates: {
+      //     lat: { type: Number },
+      //     lng: { type: Number },
+      //   },
+      // },
+      location:{
+        type:String
       },
       hostId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -54,6 +57,10 @@ const PropertySchema: Schema = new Schema(
       bathrooms: { type: Number },
       maxGuests: { type: Number },
       host: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      category:{
+        type:String,
+        enum:['House','Resort','Cabin','Apartment']
+      }
     },
     
     { timestamps: true }

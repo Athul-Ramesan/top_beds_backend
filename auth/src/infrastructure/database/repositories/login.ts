@@ -1,3 +1,4 @@
+import { customError } from "topbeds-package";
 import { comparePassword } from "../../../_lib/bcrypt/comparePassword";
 import { UserEntity, UserLoginEntity } from "../../../domain/entities";
 import { User } from "../models";
@@ -7,6 +8,9 @@ export const loginRepository =async (data:UserLoginEntity):Promise<UserEntity|nu
     try {
         console.log('data',data);
         const user:UserEntity | null= await User.findOne({email:data.email})  
+        if(user?.isBlocked){
+            throw new customError("Your account has been blocked.",403);
+        }
         if(!user){
             throw new Error("User not found");
             
