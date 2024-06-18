@@ -4,6 +4,7 @@ import { IAddAddressUseCase } from "@/domain/IUseCases/IAddaddress";
 import { IUpdadateProfileImageUseCase } from "@/domain/IUseCases/IUpdateProfileImage";
 import { IGetAllUsersUseCase } from "@/domain/IUseCases/IGetAllUsers";
 import { IUpdateUserStatusUseCase } from "@/domain/IUseCases/IUpdateUserStatus";
+import { IUpdateUserDataUseCase } from "@/domain/IUseCases/IUpdateUserData";
 
 export interface IUseCases {
     changeRoleUseCase: (dependencies:IDependencies)=>IChangeRoleUseCase
@@ -11,4 +12,5 @@ export interface IUseCases {
     updateProfileImageUseCase:(dependencies:IDependencies)=>IUpdadateProfileImageUseCase
     getAllUsersUseCase: (dependencies:IDependencies)=>IGetAllUsersUseCase
     updateUserStatusUseCase : (dependencies:IDependencies)=> IUpdateUserStatusUseCase
+    updateUserDataUseCase: (dependencies:IDependencies) => IUpdateUserDataUseCase
 }

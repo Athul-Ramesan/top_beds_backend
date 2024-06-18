@@ -4,6 +4,7 @@ import { updateProfileImageController } from "./updateProfileImage";
 import { getAllUsersController } from "./getAllUsers";
 import { updateUserStatusController } from "./updateUserStatus";
 import { getAllHostsController } from "./getAllHosts";
+import { updateUserDataController } from "./updateUserData";
 
 
 export const controllers = (dependencies:IDependencies)=>{
@@ -13,6 +14,7 @@ export const controllers = (dependencies:IDependencies)=>{
         updateProfileImage: updateProfileImageController(dependencies),
         getAllUsers: getAllUsersController(dependencies),
         updateUserStatus: updateUserStatusController(dependencies),
-        getAllHosts:getAllHostsController(dependencies)
+        getAllHosts:getAllHostsController(dependencies),
+        updateUserData:updateUserDataController(dependencies)
     }
 }

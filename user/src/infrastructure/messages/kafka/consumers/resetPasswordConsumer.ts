@@ -1,15 +1,18 @@
+
+
+import { resetPasswordRepository } from "@/infrastructure/dataBase/repositories";
 import { UserEntity } from "../../../../domain/entities/UserEntity";
-import { createUser } from "../../../dataBase/repositories/createUser";
 
 export default async (
-    data: UserEntity
+    _id:string,
+    password:string
 ) => {
     try {
 
         console.log("==========");
-        await createUser(data);
+        await resetPasswordRepository(_id,password);
 
-        console.log("user-created-consumed");
+        console.log("reset-password-consumed");
         console.log("==========");
 
     } catch (error: any) {
@@ -17,3 +20,4 @@ export default async (
     }
 
 }
+

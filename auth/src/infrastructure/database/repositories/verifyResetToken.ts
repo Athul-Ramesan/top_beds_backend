@@ -19,7 +19,7 @@ console.log("🚀 ~ verifyResetToken ~ token:", token)
           user.password = hashedPassword;
           user.resetPasswordToken = undefined;
           user.resetPasswordExpires = undefined;
-        
+          
           await user.save();
           
           return true

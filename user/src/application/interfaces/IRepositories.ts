@@ -1,4 +1,5 @@
 import { IAddress } from "@/domain/entities/AddressEnitity"
+import { IUserUpdateEntity } from "@/domain/entities/IUserUpdateEntity";
 import { UserEntity } from "@/domain/entities/UserEntity"
 
 export interface IRepositories{
@@ -14,5 +15,6 @@ export interface IRepositories{
         }
     ) =>Promise<UserEntity[] | null>;
     updateUserStatusRepository: (userId:string,isBlocked:boolean)=> Promise<UserEntity |null>;
+    updateUserDataRepository : (payload:IUserUpdateEntity) => Promise<UserEntity | null> 
     
 }

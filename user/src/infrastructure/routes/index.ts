@@ -10,7 +10,8 @@ export const routes = (dependencies: IDependencies) => {
         updateProfileImage,
         getAllUsers,
         updateUserStatus,
-        getAllHosts
+        getAllHosts,
+        updateUserData
     } = controllers(dependencies)
     const router = Router()
 
@@ -24,6 +25,8 @@ export const routes = (dependencies: IDependencies) => {
         .patch(isUserCheck,requireAdmin, updateUserStatus) 
     router.route('/get-all-hosts')
         .get(isUserCheck,requireAdmin,getAllHosts)    
+    router.route('/update-user-data')
+        .patch(isUserCheck,updateUserData)    
     return router
 };
 

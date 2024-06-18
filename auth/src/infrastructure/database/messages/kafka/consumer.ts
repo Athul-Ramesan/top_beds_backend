@@ -34,6 +34,7 @@ export const runConsumer = async ()=>{
             }
         })
     } catch (error:any) {
+        console.log("🚀 ~ runConsumer ~ error:", error)
         
     }
 }
