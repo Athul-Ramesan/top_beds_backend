@@ -27,7 +27,10 @@ export const updateUserDataController = (
             const {
                 oldPassword,
                 newPassword,
-                _id
+                _id,
+                firstName,
+                lastName,
+                phone
             } = req.body
             let password
             if (newPassword) {
@@ -53,6 +56,9 @@ export const updateUserDataController = (
             const payload: Partial<UserEntity> = {
                 _id,
                 // ...rest,
+                ...(firstName && {firstName}),
+                ...(lastName && {lastName}),
+                ...(phone && {phone}),
                 ...(password && { password })
             };
             console.log("🚀 ~ payload:", payload)
