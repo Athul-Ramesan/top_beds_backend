@@ -2,7 +2,7 @@ import { UserEntity } from "@/domain/entities";
 import { createUser } from "@/infrastructure/database/repositories";
 
 
-export default async (
+export const userCreatedConsumer =async(
     data:UserEntity
 )=>{
     try {

@@ -25,6 +25,15 @@ export default async (
                         value:JSON.stringify(data)
                     }
                 ]
+            },
+            {
+                topic: 'to-booking-service',
+                messages:[
+                    {
+                        key:'userCreated',
+                        value:JSON.stringify(data)
+                    }
+                ]
             }
         ]
 

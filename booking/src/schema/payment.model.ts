@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 
 export type PaymentDocument = Payment & Document;
 
-@Schema()
+@Schema({timestamps:true})
 export class Payment {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Booking', required: true })
   booking: mongoose.Types.ObjectId;

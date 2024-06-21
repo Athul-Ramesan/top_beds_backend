@@ -4,6 +4,8 @@ import { BookingController } from './booking.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Booking, BookingSchema } from 'src/schema/bookings.model';
 import { Payment, PaymentSchema } from 'src/schema/payment.model';
+import { Property, PropertySchema } from 'src/schema/property.model';
+import { User, UserSchema } from 'src/schema/user.model';
 
 @Module({
   imports: [MongooseModule.forFeature([
@@ -14,9 +16,18 @@ import { Payment, PaymentSchema } from 'src/schema/payment.model';
     {
       name: Payment.name,
       schema: PaymentSchema
+    },
+    {
+      name:Property.name,
+      schema:PropertySchema
+    },
+    {
+      name:User.name,
+      schema:UserSchema
     }
   ])],
   providers: [BookingService],
   controllers: [BookingController]
 })
 export class BookingModule { }
+

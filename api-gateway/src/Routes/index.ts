@@ -22,6 +22,13 @@ const ROUTES:IRoute[] = [
             target:'http://localhost:3002',
             changeOrigin:true
         }
+    },
+    {
+        url:'/booking',
+        proxy:{
+            target:'http://localhost:3003',
+            changeOrigin:true
+        }
     }
 
 ]

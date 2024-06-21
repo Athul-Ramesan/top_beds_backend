@@ -6,16 +6,6 @@ const PropertySchema: Schema = new Schema(
     {
       title: { type: String },
       description: { type: String },
-      // location: {
-      //   address: { type: String },
-      //   city: { type: String },
-      //   state: { type: String },
-      //   country: { type: String },
-      //   coordinates: {
-      //     lat: { type: Number },
-      //     lng: { type: Number },
-      //   },
-      // },
       location:{
         type:String
       },

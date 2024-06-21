@@ -14,9 +14,10 @@ export interface IRepositories {
             sort?:string
         }) => Promise<IProperty[]>;
     deletePropertyRepository: (data: string) => Promise<Boolean>
-    getHostIdRepository: (data: string) => string
+    getHostIdRepository: (data: string) =>Promise<string | null> 
     getHostPropertiesRepository: (hostId: string) => Promise<IProperty[]>;
     addNewPhotosRepository : (propertyId:string, images:string[]) => Promise<IProperty>;
     updatePropertyRepository: (propertyId:string,data:IUpdatePropertyEntity) => Promise<IProperty>
     deletePropertyPhotoRepository: (propertyId:string, image:string) => Promise<IProperty>
 }
+

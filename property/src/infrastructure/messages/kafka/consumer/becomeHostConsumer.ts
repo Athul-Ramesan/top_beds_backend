@@ -1,7 +1,7 @@
 import { IAddress } from "@/domain/entities/IAddress";
 import { User } from "@/infrastructure/database/Models";
 
-export default async( _id: string,
+export const becomeHostConsumer= async( _id: string,
     data:IAddress
 )=>{
     try {

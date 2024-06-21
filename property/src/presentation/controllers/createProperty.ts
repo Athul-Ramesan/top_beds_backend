@@ -1,4 +1,5 @@
 import { IDependencies } from "@/application/interfaces/IDependencies";
+import { propertyCreatedProducer } from "@/infrastructure/messages/kafka/producer/propertyCreated";
 import { validatePropertyData } from "@/lib/validation/validatePropertyDetails";
 import { uploadMultipleImagesToCloudinary } from "@/utils/cloudinary/uploadImages";
 import { NextFunction, Request, Response } from "express";
@@ -28,10 +29,12 @@ export const createPropertyController = (dependencies: IDependencies) => {
             
             const {value, error} = validatePropertyData.validate(propertyData)
             if(error){
+                console.log("🚀 ~ return ~ error from validation:", error)
                 throw new customError(error.message,400)
             }
 
             const property = await createPropertyUseCase(dependencies).execute(value)
+            propertyCreatedProducer(property)
             res.status(200).json({
                 message: 'property created',
                 property

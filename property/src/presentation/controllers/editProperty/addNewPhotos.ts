@@ -1,5 +1,7 @@
 
 import { IDependencies } from "@/application/interfaces/IDependencies";
+import { propertyImageAddedProducer } from "@/infrastructure/messages/kafka/producer/propertyImageAddedProducer";
+import { propertyUpdatedProducer } from "@/infrastructure/messages/kafka/producer/propertyUpdatedProducer";
 import { validateImages } from "@/lib/validation/validateImages";
 import { uploadMultipleImagesToCloudinary } from "@/utils/cloudinary/uploadImages";
 import { NextFunction, Request, Response } from "express";
@@ -28,6 +30,8 @@ export const addNewPhotosController = (dependencies: IDependencies) => {
             
 
             const updatedProperty = await addNewPhotosUseCase(dependencies).execute(propertyId,cloudinaryUrls)
+            propertyImageAddedProducer(propertyId,cloudinaryUrls)
+
             res.status(200).json({
                 message: 'property updated successfully',
                 updatedProperty

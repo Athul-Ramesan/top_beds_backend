@@ -10,6 +10,12 @@ export const validatePropertyData = Joi.object({
     description: Joi.string().required().messages({
         'any.required': 'Description is required'
     }),
+    category: Joi.string().required().messages({
+        'any.required': 'category is required'
+    }),
+    location: Joi.string().required().messages({
+        'any.required': 'location is required'
+    }),
     address: Joi.string().required().messages({
         'any.required': 'Address is required'
     }),

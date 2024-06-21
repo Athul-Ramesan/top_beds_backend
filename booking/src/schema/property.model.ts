@@ -12,25 +12,25 @@ export class Property {
   @Prop()
   description: string;
 
-  @Prop({
-    type: {
-      address: String,
-      city: String,
-      state: String,
-      country: String,
-      coordinates: {
-        lat: Number,
-        lng: Number,
-      },
-    },
-  })
-  location: {
-    address: string;
-    city: string;
-    state: string;
-    country: string;
-    coordinates: { lat: number; lng: number };
-  };
+  // @Prop({
+  //   type: {
+  //     address: String,
+  //     city: String,
+  //     state: String,
+  //     country: String,
+  //     coordinates: {
+  //       lat: Number,
+  //       lng: Number,
+  //     },
+  //   },
+  // })
+  // location: {
+  //   address: string;
+  //   city: string;
+  //   state: string;
+  //   country: string;
+  //   coordinates: { lat: number; lng: number };
+  // };
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   hostId: mongoose.Types.ObjectId;
@@ -67,6 +67,9 @@ export class Property {
 
   @Prop({ type: String, enum: ['House', 'Resort', 'Cabin', 'Apartment'] })
   category: string;
+
+  @Prop(String)
+  location:string;
 }
 
 export const PropertySchema = SchemaFactory.createForClass(Property);

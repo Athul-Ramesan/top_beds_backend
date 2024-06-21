@@ -19,4 +19,5 @@ const setupProxies = (app:Application, routes:IRoute[])=>{
     })
 }
 
+
 export {setupProxies}

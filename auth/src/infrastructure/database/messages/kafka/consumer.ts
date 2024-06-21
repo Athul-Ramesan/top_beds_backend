@@ -14,7 +14,7 @@ export const runConsumer = async ()=>{
             eachMessage: async ({message}) => {
                 console.log("🚀 ~ eachMessage: ~ message:", message)
                 const {key, value} = message
-                console.log(key,">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+                
                 
                 const subscriberMethod = String(key)
                 console.log("🚀 ~ eachMessage: ~ subscriberMethod:😔😔😔😔", subscriberMethod)

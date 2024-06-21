@@ -26,6 +26,15 @@ export default async (
                         value:JSON.stringify({_id,password})
                     }
                 ]
+            },
+            {
+                topic: 'to-booking-service',
+                messages:[
+                    {
+                        key:'resetPassword',
+                        value:JSON.stringify({_id,password})
+                    }
+                ]
             }
         ]
 

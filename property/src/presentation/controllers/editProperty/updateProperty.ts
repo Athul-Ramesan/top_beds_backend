@@ -1,5 +1,6 @@
 
 import { IDependencies } from "@/application/interfaces/IDependencies";
+import { propertyUpdatedProducer } from "@/infrastructure/messages/kafka/producer/propertyUpdatedProducer";
 import { validateUpdatePropertyData } from "@/lib/validation/validateGeneralPropertyData";
 import { validateImages } from "@/lib/validation/validateImages";
 import { uploadMultipleImagesToCloudinary } from "@/utils/cloudinary/uploadImages";
@@ -25,6 +26,7 @@ export const updatePropertyController = (dependencies: IDependencies) => {
             
             const updatedProperty = await updatePropertyUseCase(dependencies).execute(propertyId,data)
             console.log("🚀 ~ return ~ updatedProperty:", updatedProperty)
+            propertyUpdatedProducer(propertyId, data)
             res.status(200).json({
                 message: 'property updated successfully',
                 updatedProperty
