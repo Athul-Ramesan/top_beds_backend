@@ -33,6 +33,15 @@ export const userStatusUpdatedProducer = async (
                 }
             ]
         },
+        {
+            topic:'to-booking-service',
+            messages:[
+                {
+                    key:'userStatusUpdate',
+                    value: JSON.stringify(dataObject)
+                }
+            ]
+        },
     ]
         await producer.sendBatch({topicMessages:messages})
     } catch (error:any) {

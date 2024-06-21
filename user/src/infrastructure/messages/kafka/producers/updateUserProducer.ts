@@ -32,6 +32,15 @@ export const updateUserProducer = async (
                 }
             ]
         },
+        {
+            topic:'to-booking-service',
+            messages:[
+                {
+                    key:'updateUserData',
+                    value: JSON.stringify({_id,...payload})
+                }
+            ]
+        },
     ]
         await producer.sendBatch({topicMessages:messages})
     } catch (error:any) {

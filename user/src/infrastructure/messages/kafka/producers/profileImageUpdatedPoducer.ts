@@ -33,6 +33,15 @@ export const profileImageUpdatedProducer = async (
                 }
             ]
         },
+        {
+            topic:'to-booking-service',
+            messages:[
+                {
+                    key:'profileImageUpdate',
+                    value: JSON.stringify(dataObject)
+                }
+            ]
+        },
     ]
         await producer.sendBatch({topicMessages:messages})
     } catch (error:any) {
