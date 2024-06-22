@@ -5,17 +5,15 @@ import { FilterQuery } from "mongoose"
 export const getAllHosts =async(page:number,limit:number,search:string,status:string)=>{
 
     try {
+
         const query:FilterQuery<UserEntity> ={}
         if(status){
             query["hostStatus"]= String(status)
             query["role"] = "host"
         }
-        const hosts = await User.find({
-            $or: [
-              { role: "host" },
-              { hostStatus: { $in: ["requested", "rejected", "accepted"] } }
-            ]
-          })
+        const hosts = await User.find(
+              { role: "host" ,isBlocked:false}
+          )
         console.log("🚀 ~ getAllHosts ~ hosts:", hosts)
         return hosts
     } catch (error:any) {

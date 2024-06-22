@@ -5,6 +5,8 @@ import { getAllUsersController } from "./getAllUsers";
 import { updateUserStatusController } from "./updateUserStatus";
 import { getAllHostsController } from "./getAllHosts";
 import { updateUserDataController } from "./updateUserData";
+import { getAllUsersWithHostRequests } from "./getAllUsersWithHostRequest";
+import { changeHostStatusController } from "./changeHostStatus";
 
 
 export const controllers = (dependencies:IDependencies)=>{
@@ -15,6 +17,8 @@ export const controllers = (dependencies:IDependencies)=>{
         getAllUsers: getAllUsersController(dependencies),
         updateUserStatus: updateUserStatusController(dependencies),
         getAllHosts:getAllHostsController(dependencies),
-        updateUserData:updateUserDataController(dependencies)
+        updateUserData:updateUserDataController(dependencies),
+        getAllUsersWithHostRequests: getAllUsersWithHostRequests(dependencies),
+        changeHostStatus: changeHostStatusController(dependencies)
     }
 }

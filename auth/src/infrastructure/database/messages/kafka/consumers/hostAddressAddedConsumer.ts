@@ -7,7 +7,7 @@ export const hostAddressAddedConsumer =async (_id: string, data: IAddress) => {
         console.log("auth becomehost consumer",data)
         const user = await User.findOneAndUpdate(
             { _id: _id },
-            { $set: { address:data,role:"host" } },
+            { $set: { address:data}, hostStatus:'requested' },
             { new: true }
         )
         console.log("🚀 ~ hostAddressAddedConsumer ~ user:", user)

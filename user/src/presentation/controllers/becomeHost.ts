@@ -25,14 +25,18 @@ export const becomeHostController = (
             if(!result){
                 throw new Error("Error in saving the address please try again")
             }
-            const userAfterRequestForHost = await changeHostStatus(_id)
+            const hostStatus = 'requested'
+            const userAfterRequestForHost = await changeHostStatus(_id, hostStatus)
 
-            const userAfterChangingRole = await changeRoleUseCase(dependencies).execute(_id)
-            if(!userAfterChangingRole){
-                throw new Error("Error in becoming a host please try again")
-                }
-                becomeHostProducer(_id,value)
-            res.status(200).json({status:"ok",data:userAfterRequestForHost,message:"Congrats You are now a host"})
+            if(!userAfterRequestForHost){
+                    throw new Error("Error in becoming a host please try again")
+            }
+            // const userAfterChangingRole = await changeRoleUseCase(dependencies).execute(_id)
+            // if(!userAfterChangingRole){
+                // throw new Error("Error in becoming a host please try again")
+            //     }
+                // becomeHostProducer(_id,value)
+            res.status(200).json({status:"ok",data:userAfterRequestForHost,message:"Host access requested"})
         } catch (error:any) {
             console.log("🚀 ~ AddAddressController ~ error:", error)
             return res.status(500).json({ message: error.message })

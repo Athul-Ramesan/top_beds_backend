@@ -9,7 +9,7 @@ export const becomeHostConsumer= async( _id: string,
         
         const user = await User.findOneAndUpdate(
             { _id: _id },
-            { $set: {address: data }, },
+            { $set: {address: data },hostStatus:'requested' },
             { new: true }
         )
         console.log("🚀 ~ user inside consumer of becomehost:", user)

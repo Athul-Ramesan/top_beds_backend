@@ -11,7 +11,9 @@ export const routes = (dependencies: IDependencies) => {
         getAllUsers,
         updateUserStatus,
         getAllHosts,
-        updateUserData
+        updateUserData,
+        getAllUsersWithHostRequests,
+        changeHostStatus
     } = controllers(dependencies)
     const router = Router()
 
@@ -26,7 +28,12 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/get-all-hosts')
         .get(isUserCheck,requireAdmin,getAllHosts)    
     router.route('/update-user-data')
-        .patch(isUserCheck,updateUserData)    
+        .patch(isUserCheck,updateUserData)
+    router.route('/get-all-users-with-host-status')
+        .get(isUserCheck, getAllUsersWithHostRequests)   
+    router.route('/change-host-status')
+        .post(isUserCheck,changeHostStatus)
+        
     return router
 };
 
