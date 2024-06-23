@@ -28,6 +28,10 @@ export class LocationDto {
 }
 
 export class PropertyDto {
+
+    @IsString()
+    _id: string;
+
     @IsString()
     title: string;
 

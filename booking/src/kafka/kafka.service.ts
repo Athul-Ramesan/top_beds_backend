@@ -55,6 +55,7 @@ export class KafkaService implements OnModuleInit {
                             { $set: updatePayload },
                             { new: true }
                         )
+
                         console.log("🚀 ~ KafkaService ~ onModuleInit ~ resultUser:", resultUser)
                     } catch (error: any) {
                         console.log("🚀 ~ KafkaService ~ onModuleInit ~ error:", error)
@@ -62,6 +63,7 @@ export class KafkaService implements OnModuleInit {
                     }
                 }
 
+                
                 if (subscriberMethod === 'userStatusUpdate') {
                     try {
                         const { _id, isBlocked } = JSON.parse(value.toString())

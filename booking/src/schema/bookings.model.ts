@@ -29,8 +29,6 @@ export class Booking {
 
   @Prop()
   paymentIntentId: string;
-
-
 }
 
 export const BookingSchema = SchemaFactory.createForClass(Booking);

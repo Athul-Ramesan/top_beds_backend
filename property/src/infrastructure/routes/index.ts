@@ -1,5 +1,6 @@
 import { IDependencies } from "@/application/interfaces/IDependencies";
 import { controllers } from "@/presentation/controllers";
+import { updateAvailabilityController } from "@/presentation/controllers/editProperty/updateAvailability";
 
 import { upload } from "@/utils/multer/imageUpload";
 import { Router } from "express";
@@ -26,13 +27,15 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/delete-property/:id')
         .delete(isUserCheck,deleteProperty)
     router.route('/get-host-properties/:hostId')    
-        .get(getHostProperties)
+        .get(isUserCheck,getHostProperties)
     router.route('/upload-images/:propertyId')
-        .post(uploadNewImages)    
+        .post(isUserCheck,uploadNewImages)    
     router.route('/update-property/:propertyId')
-        .post(updateProperty)    
+        .post(isUserCheck,updateProperty)    
     router.route('/delete-photo')
-            .delete(deletePropertyPhoto)   
+            .delete(isUserCheck,deletePropertyPhoto)   
+    router.route('/update-property-availability')
+            .patch(updateAvailabilityController)   
              
     return router
 };
