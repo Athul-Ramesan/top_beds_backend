@@ -9,8 +9,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser())
   dotenv.config()
-  // app.useGlobalPipes(new ValidationPipe());
   await app.listen(3003);
 }
+
 bootstrap();
 

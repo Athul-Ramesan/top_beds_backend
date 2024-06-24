@@ -1,6 +1,7 @@
 import { IDependencies } from "@/application/interfaces/IDependencies"
 import { profileImageUpdatedProducer } from "@/infrastructure/messages/kafka/producers/profileImageUpdatedPoducer"
 import { changeHostStatus } from "@/lib/services/changeHostStatus"
+import axios from "axios"
 import { NextFunction, Request, Response } from "express"
 import { NotFoundError, customError, uploadSingleImageToCloudinary } from "topbeds-package"
 
@@ -20,7 +21,17 @@ export const changeHostStatusController = (
         try {
             
             const result = await changeHostStatus(_id, hostStatus)
-
+            const response = await axios.patch('http://localhost:5000/auth/change-host-status', 
+                {_id: _id, hostStatus: hostStatus}, 
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    withCredentials: true,
+                }
+            );
+             console.log("🚀 ~ response:", response)
+             
             res.status(200).json({status:"ok",data:result,message:"Host status updated"})
         } catch (error:any) {
             if (error instanceof NotFoundError) {

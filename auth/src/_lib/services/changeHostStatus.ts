@@ -1,10 +1,10 @@
-import { User } from "@/infrastructure/dataBase/models/User"
 import { NotFoundError } from "topbeds-package";
+import { User } from "../../infrastructure/database/models";
 
 
 export const changeHostStatus = async (id: string, hostStatus: string) => {
     try {
-        let role ='user'
+        let role = 'user'
         if (hostStatus === 'accepted') {
             role = 'host'
         }

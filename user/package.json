@@ -18,6 +18,7 @@
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -31,7 +32,7 @@
     "mongoose": "^8.3.2",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
-    "topbeds-package": "^1.1.8",
+    "topbeds-package": "^1.1.10",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {

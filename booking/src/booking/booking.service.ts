@@ -114,7 +114,6 @@ export class BookingService {
             available
             })
         console.log("🚀 ~ BookingService ~ availability: after pushing ", availability)
-        
         await property.save()
     }
 }

@@ -24,8 +24,11 @@ export const getAllUsersController = (
             const search = String(req.query?.search)
 
             const data = await getAllUsersUseCase(dependencies).execute({limit,page,search})
-            console.log("🚀 ~ data:", data)
+            // console.log("🚀 ~ data:", data)
        
+            
+
+
             const totalUsers =await getTotalUsers()
             console.log("🚀 ~ totalUsers:", totalUsers)
             if(!data){

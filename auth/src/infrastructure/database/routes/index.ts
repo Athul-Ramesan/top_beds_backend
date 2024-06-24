@@ -3,6 +3,8 @@ import { IDependencies } from "../../../application/interfaces/IDependencies";
 import { controllers } from "../../../presentation/controllers";
 import { authMiddleware } from "../../../_lib/middleware/auth";
 import {isUserCheck} from 'topbeds-package'
+import { changeHostStatus } from "../../../_lib/services/changeHostStatus";
+import { changeHostStatusController } from "../../../presentation/controllers/updateHostStatus";
 // import { isUserCheck } from "../../../_lib/middleware/isUserCheck";
 
 export const routes = (dependencies: IDependencies) => {
@@ -37,8 +39,8 @@ export const routes = (dependencies: IDependencies) => {
         .get(isUserCheck,getUserData)   
     router.route('/forgot-password')  
         .post(forgotPassword)     
-    router.route('/reset-password/:token')
-        .post(resetPassword)
+    router.route('/change-host-status')
+        .patch(changeHostStatusController)
     return router
 }
 
