@@ -10,6 +10,13 @@ enum Gender{
     female="female",
     transgender="transgender"
 }
+export interface ISubscription {
+        plan: string
+        startDate: Date
+        expiryDate: Date
+        active: boolean,
+        stripeSessionId: string
+}
 
 export interface UserEntity{
     _id?:string,
@@ -24,6 +31,5 @@ export interface UserEntity{
     isBlocked?:boolean,
     isGoogle?:boolean,
     profileImage?:string ,
-    resetPasswordToken?: string;
-    resetPasswordExpires?: Date;
+    subscriptions?: ISubscription
 }

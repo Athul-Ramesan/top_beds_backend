@@ -5,6 +5,8 @@ import { authMiddleware } from "../../../_lib/middleware/auth";
 import {isUserCheck} from 'topbeds-package'
 import { changeHostStatus } from "../../../_lib/services/changeHostStatus";
 import { changeHostStatusController } from "../../../presentation/controllers/updateHostStatus";
+import { updateSubscriptionDataController } from "../../../presentation/controllers/updateSubscription";
+import { updateBookingController } from "../../../presentation/controllers/updateBooking";
 // import { isUserCheck } from "../../../_lib/middleware/isUserCheck";
 
 export const routes = (dependencies: IDependencies) => {
@@ -41,6 +43,12 @@ export const routes = (dependencies: IDependencies) => {
         .post(forgotPassword)     
     router.route('/change-host-status')
         .patch(changeHostStatusController)
+    router.route('/update-subscription-data')
+        .post(updateSubscriptionDataController)  
+    router.route('/update-booking-data')
+        .post(updateBookingController)  
+
     return router
 }
+
 

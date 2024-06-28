@@ -1,14 +1,14 @@
-import { Schema,Types,model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 import { UserEntity } from "../../../domain/entities/UserEntity";
 
 const userSchema = new Schema({
-    firstName:{
-        type:String,
-        required:true
+    firstName: {
+        type: String,
+        required: true
     },
-    lastName:{
-        type:String,
-        required:true
+    lastName: {
+        type: String,
+        required: true
     },
     dateOfBirth: {
         type: Date
@@ -22,7 +22,7 @@ const userSchema = new Schema({
             city: { type: String },
             state: { type: String },
             zip: { type: String },
-            phone: {type:String}
+            phone: { type: String }
         }
     },
     // username:{
@@ -30,42 +30,61 @@ const userSchema = new Schema({
     //     unique:true,
     //     index:true
     // },
-    password:{
-        type:String
+    password: {
+        type: String
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
-        index:true
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        index: true
     },
-    gender:{
-        type:String,
-        enum:['male','female','transgender']
+    gender: {
+        type: String,
+        enum: ['male', 'female', 'transgender']
     },
-    role:{
-        type:String,
-        enum:["user","host","admin"],
-        default:"user"
+    role: {
+        type: String,
+        enum: ["user", "host", "admin"],
+        default: "user"
     },
-    hostStatus:{
-        type:String,
-        enum: ["accepted",'rejected','requested']
+    hostStatus: {
+        type: String,
+        enum: ["accepted", 'rejected', 'requested']
     },
     isBlocked: {
-        type:Boolean,
-        default:false
-    },
-    isGoogle:{
-        type:Boolean,
+        type: Boolean,
         default: false
     },
-    profileImage:{
-        type:String
+    isGoogle: {
+        type: Boolean,
+        default: false
     },
-  
-},{
-    timestamps:true
+    profileImage: {
+        type: String
+    },
+    subscription: [
+        {
+            plan: {
+                type: String,
+            },
+            expiryDate: {
+                type: Date,
+            },
+            amount: {
+                type: String,
+            },
+            active: {
+                type: Boolean
+            },
+            stripeSessionId: {
+                type: String
+            }
+        },
+    ],
+
+}, {
+    timestamps: true
 })
 
-export const User = model<UserEntity>("user",userSchema)
+export const User = model<UserEntity>("user", userSchema)

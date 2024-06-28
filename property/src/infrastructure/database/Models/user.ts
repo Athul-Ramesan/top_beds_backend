@@ -16,6 +16,7 @@ const userSchema = new Schema({
     phone: {
         type: String
     },
+    
     address: {
         type: {
             street: { type: String },
@@ -63,6 +64,25 @@ const userSchema = new Schema({
     profileImage:{
         type:String
     },
+    subscription: [
+        {
+          plan: {
+            type: String,
+          },
+          expiryDate: {
+            type: Date,
+          },
+          amount: {
+            type: Number,
+          },
+          active:{
+            type:Boolean
+          },
+          stripeSessionId:{
+            type:String
+          }
+        },
+      ],
   
 },{
     timestamps:true

@@ -29,6 +29,12 @@ export class Booking {
 
   @Prop()
   paymentIntentId: string;
+
+  @Prop({ type: String, enum: ['Pending', 'Accepted','Cancelled'], default: 'Pending' })
+  bookingStatus: string;
+
+  // @Prop({type:String, enum:['Pending','Refunded','Requested']})
+
 }
 
 export const BookingSchema = SchemaFactory.createForClass(Booking);

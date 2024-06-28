@@ -38,6 +38,7 @@ export class KafkaService implements OnModuleInit {
                 partition,
                 message
             }) => {
+                if(message){
                 const { key, value } = message
                 const subscriberMethod = String(key)
                 console.log(`Received message from key:${message.key} value:${message.value} on topic ${topic} partition ${partition}`)
@@ -163,6 +164,7 @@ export class KafkaService implements OnModuleInit {
                     )
                     console.log("🚀 ~ KafkaService ~ onModuleInit ~ updatedProperty:", updatedProperty)
                 }
+            }
             }
         })
     }

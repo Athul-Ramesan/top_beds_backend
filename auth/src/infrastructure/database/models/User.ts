@@ -61,6 +61,25 @@ const userSchema = new Schema({
     },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
+    subscriptions: [
+        {
+          plan: {
+            type: String,
+          },
+          expiryDate: {
+            type: Date,
+          },
+          amount: {
+            type: String,
+          },
+          active:{
+            type:Boolean
+          },
+          stripeSessionId:{
+            type:String
+          }
+        },
+      ],
 },{
     timestamps:true
 })

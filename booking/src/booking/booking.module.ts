@@ -6,7 +6,7 @@ import { Booking, BookingSchema } from 'src/schema/bookings.model';
 import { Payment, PaymentSchema } from 'src/schema/payment.model';
 import { Property, PropertySchema } from 'src/schema/property.model';
 import { User, UserSchema } from 'src/schema/user.model';
-
+import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [MongooseModule.forFeature([
     {
@@ -25,7 +25,9 @@ import { User, UserSchema } from 'src/schema/user.model';
       name:User.name,
       schema:UserSchema
     }
-  ])],
+  ]),
+  HttpModule
+],
   providers: [BookingService],
   controllers: [BookingController]
 })

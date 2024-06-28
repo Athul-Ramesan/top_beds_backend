@@ -11,13 +11,15 @@ export class BookingController {
         private readonly bookingService: BookingService
     ) { }
 
-    @Post('make-payment-session')
+    @Post('make-payment-session/:userId')
     async makePaymentSession(
+        @Param() user: {userId:string},
         @Body() makePaymentDto: makePaymentDto,
         @Res() res
 
     ) {
-
+        const {userId} = user
+        console.log("🚀 ~ BookingController ~ userId:", userId)
         console.log(makePaymentDto, 'req.bodyyyyyyyyyyyyyy')
 
         if (!makePaymentDto) {
@@ -52,18 +54,20 @@ export class BookingController {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: 'http://localhost:5173/index/paymentSuccess',
+            success_url: 'http://localhost:5173/index/paymentSuccess/{CHECKOUT_SESSION_ID}',
             cancel_url: "http://localhost:5173/index/paymentSuccess"
         })
         console.log("🚀 ~ BookingController ~ session:", session)
+        let booking:any ={}
         if (session.id) {
-            const booking = this.bookingService.createBooking(
-                property.hostId,
+             booking = await this.bookingService.createBooking(
+                userId,
                 property._id,
                 newStartDate,
                 newEndDate,
                 guests,
-                totalAmount
+                totalAmount,
+                
             )
             console.log("🚀 ~ BookingController ~ booking:", booking)
             if (!booking) {
@@ -72,7 +76,21 @@ export class BookingController {
 
         }
         console.log(makePaymentDto)
-        res.status(200).json({ id: session.id })
+        console.log(booking)
+        res.status(200).json({ message: "OK", id: session.id ,bookingId:booking._id})
+    }
+    @Post('confirm')
+    async confirmBooking(
+        @Body() confirmBookingData,
+        @Res() res
+    ) {
+        console.log(confirmBookingData)
+        return this.bookingService.confirmBooking(confirmBookingData)
+    }
 
+    @Get('payment-session-status/:sessionId')
+    async getSessionStatus(@Param('sessionId') sessionId: string) {
+        console.log("🚀 ~ SubscriptionController ~ getSessionStatus ~ sessionId:", sessionId)
+        return this.bookingService.getSessionStatus(sessionId);
     }
 }

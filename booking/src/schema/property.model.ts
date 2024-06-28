@@ -47,6 +47,7 @@ export class Property {
   @Prop([String])
   amenities: string[];
 
+  
   @Prop([String])
   houseRules: string[];
 

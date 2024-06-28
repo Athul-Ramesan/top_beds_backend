@@ -19,19 +19,7 @@ const PropertySchema: Schema = new Schema(
           ref:"Review"
         }
       ],
-      availability: [
-        {
-          startDate: {
-            type: Date,
-          },
-          endDate: {
-            type: Date,
-          },
-          available: {
-            type: Boolean,
-          },
-        },
-      ],
+      
       active : {
         type: Boolean,
         default: false
@@ -50,6 +38,11 @@ const PropertySchema: Schema = new Schema(
       category:{
         type:String,
         enum:['House','Resort','Cabin','Apartment']
+      },
+      availability:{
+        startDate: { type: Date, required: true },
+        endDate: { type: Date, required: true },
+        available: { type: Boolean, required: true },
       }
     },
     

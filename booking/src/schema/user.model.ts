@@ -68,6 +68,9 @@ export class User extends Document {
 
   @Prop()
   resetPasswordExpires: Date;
+
+  @Prop([{plan: String ,startDate:Date, expiryDate:Date  ,active:Boolean ,stripeSessionId:String}])
+  subscriptions: { plan:String, startDate:Date , expiryDate:Date, active:Boolean , stripeSessionId:String}[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
