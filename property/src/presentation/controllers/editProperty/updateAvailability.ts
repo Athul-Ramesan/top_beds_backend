@@ -28,7 +28,7 @@ export const updateAvailabilityController = async (req: Request, res: Response, 
         }
 
 
-
+        res.status(201).json({message:'property availability updated'})
     } catch (error: any) {
         console.log("🚀 ~ file: createPropertyController.ts ~ line 21 ~ error", error)
 

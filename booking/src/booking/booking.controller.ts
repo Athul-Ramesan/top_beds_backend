@@ -3,6 +3,7 @@ import { BookingService } from './booking.service';
 import { Response } from 'express';
 import { makePaymentDto } from 'src/dto/makePaymentDto';
 import stripe from 'stripe';
+import { Booking } from 'src/schema/bookings.model';
 
 
 @Controller('booking')
@@ -13,12 +14,12 @@ export class BookingController {
 
     @Post('make-payment-session/:userId')
     async makePaymentSession(
-        @Param() user: {userId:string},
+        @Param() user: { userId: string },
         @Body() makePaymentDto: makePaymentDto,
         @Res() res
 
     ) {
-        const {userId} = user
+        const { userId } = user
         console.log("🚀 ~ BookingController ~ userId:", userId)
         console.log(makePaymentDto, 'req.bodyyyyyyyyyyyyyy')
 
@@ -58,16 +59,16 @@ export class BookingController {
             cancel_url: "http://localhost:5173/index/paymentSuccess"
         })
         console.log("🚀 ~ BookingController ~ session:", session)
-        let booking:any ={}
+        let booking: any = {}
         if (session.id) {
-             booking = await this.bookingService.createBooking(
+            booking = await this.bookingService.createBooking(
                 userId,
                 property._id,
                 newStartDate,
                 newEndDate,
                 guests,
                 totalAmount,
-                
+
             )
             console.log("🚀 ~ BookingController ~ booking:", booking)
             if (!booking) {
@@ -77,7 +78,7 @@ export class BookingController {
         }
         console.log(makePaymentDto)
         console.log(booking)
-        res.status(200).json({ message: "OK", id: session.id ,bookingId:booking._id})
+        res.status(200).json({ message: "OK", id: session.id, bookingId: booking._id })
     }
     @Post('confirm')
     async confirmBooking(
@@ -93,4 +94,28 @@ export class BookingController {
         console.log("🚀 ~ SubscriptionController ~ getSessionStatus ~ sessionId:", sessionId)
         return this.bookingService.getSessionStatus(sessionId);
     }
+    @Get('user/:userId')
+    async getUserBookings(@Param('userId') userId: string) {
+      return this.bookingService.getUserBookings(userId);
+    }
+  
+    @Get('host/:hostId')
+    async getHostBookings(@Param('hostId') hostId: string) {
+      return this.bookingService.getHostBookings(hostId);
+    }
+    @Get(':bookingId')
+    async getBooking(@Param('bookingId') bookingId: string) {
+      return this.bookingService.getBookingById(bookingId);
+    }
+
+  @Post('cancel/:bookingId')
+  async cancelBooking(
+    @Param('bookingId') bookingId: string,
+    @Body('refundPercentage') refundPercentage: number,
+  ) {
+    console.log("🚀 ~ BookingController ~ refundPercentage:", refundPercentage)
+    return this.bookingService.cancelBooking(bookingId, refundPercentage);
+  }
+    
+  
 }

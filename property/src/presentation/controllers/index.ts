@@ -6,16 +6,22 @@ import { getHostPropertiesController } from "./getHostProperties";
 import { addNewPhotosController } from "./editProperty/addNewPhotos";
 import { updatePropertyController } from "./editProperty/updateProperty";
 import { deletePropertyPhotoController } from "./deletePropertyPhoto";
+import { addFacilityController } from "./editProperty/addFacility";
+import { deleteFacilityController } from "./editProperty/deleteFacility";
+import { getAllFacilitiesController } from "./editProperty/getAllFacilities";
 
 export const controllers = (dependencies:IDependencies)=>{
     
     return {
         createProperty: createPropertyController(dependencies),
+        getAllFacilities:getAllFacilitiesController,
         getAllProperties: getAllProperties(dependencies),
         deleteProperty: deletePropertyController(dependencies),
         getHostProperties: getHostPropertiesController(dependencies),
+        addFacility: addFacilityController,
         uploadNewImages: addNewPhotosController(dependencies),
+        deleteFacility: deleteFacilityController,
         updateProperty :updatePropertyController(dependencies),
-        deletePropertyPhoto: deletePropertyPhotoController(dependencies)
+        deletePropertyPhoto: deletePropertyPhotoController(dependencies),
     }
 }

@@ -13,7 +13,10 @@ export const routes = (dependencies: IDependencies) => {
         getHostProperties,
         uploadNewImages,
         updateProperty,
-        deletePropertyPhoto
+        deletePropertyPhoto,
+        addFacility,
+        deleteFacility,
+        getAllFacilities
      } = controllers(dependencies)
     const router = Router()
 
@@ -36,6 +39,12 @@ export const routes = (dependencies: IDependencies) => {
             .delete(deletePropertyPhoto)   
     router.route('/update-property-availability')
             .patch(updateAvailabilityController)   
+    router.route('/add-property-facility')
+            .post(addFacility)   
+    router.route('/delete-property-facility/:_id')
+            .delete(deleteFacility)   
+    router.route('/get-property-facility/')
+            .get(getAllFacilities)   
              
     return router
 };

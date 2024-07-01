@@ -40,9 +40,9 @@ const PropertySchema: Schema = new Schema(
         enum:['House','Resort','Cabin','Apartment']
       },
       availability:{
-        startDate: { type: Date, required: true },
-        endDate: { type: Date, required: true },
-        available: { type: Boolean, required: true },
+        startDate: { type: Date },
+        endDate: { type: Date},
+        available: { type: Boolean},
       }
     },
     
