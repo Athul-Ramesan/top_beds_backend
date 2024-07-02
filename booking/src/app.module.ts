@@ -5,9 +5,8 @@ import { MONGO_CONNECTION } from './app.properties';
 import { KafkaModule } from './kafka/kafka.module';
 import { ConfigModule } from '@nestjs/config';
 import { SubscriptionModule } from './subscription/subscription.module';
-import { HttpModule } from '@nestjs/axios';
-import { CronService } from './cron/cron.service';
 import { CronModule } from './cron/cron.module';
+import { ReviewModule } from './review/review.module';
 
 
 @Module({
@@ -21,6 +20,7 @@ import { CronModule } from './cron/cron.module';
       load:[()=>require('./config')]
     }),
     SubscriptionModule,
+    ReviewModule,
   ],
 })
 export class AppModule {}

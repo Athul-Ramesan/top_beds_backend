@@ -211,7 +211,7 @@ export class BookingService {
     const upcomingBookings = await this.BookingModel.find({
       user: userId,
       startDate: { $gte: currentDate },
-    }).populate('property');
+    }).populate('property').populate('user')
     console.log("🚀 ~ BookingService ~ getUserBookings ~ upcomingBookings:", upcomingBookings)
     const allBookings = await this.BookingModel.find()
     console.log("🚀 ~ BookingService ~ getUserBookings ~ allBookings:", allBookings)
@@ -219,7 +219,7 @@ export class BookingService {
     const completedBookings = await this.BookingModel.find({
       user: userId,
       endDate: { $lt: currentDate },
-    }).populate('property');
+    }).populate('property').populate('user')
     console.log("🚀 ~ BookingService ~ getUserBookings ~ completedBookings:", completedBookings)
 
     return { upcomingBookings, completedBookings };
@@ -234,12 +234,12 @@ export class BookingService {
     const upcomingBookings = await this.BookingModel.find({
       property: { $in: propertyIds },
       startDate: { $gte: currentDate },
-    }).populate('property');
+    }).populate('property').populate('user')
 
     const completedBookings = await this.BookingModel.find({
       property: { $in: propertyIds },
       endDate: { $lt: currentDate },
-    }).populate('property');
+    }).populate('property').populate('user')
 
     return { upcomingBookings, completedBookings };
   }
