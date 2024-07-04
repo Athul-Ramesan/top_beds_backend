@@ -21,7 +21,7 @@ export class Chat {
 
 
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Message' }] })
-  messages: Message[];
+  messages: Types.ObjectId[];
 
   @Prop({type:String,enum: ['requested', 'accepted', 'pending']})
   requestStatus: string;
