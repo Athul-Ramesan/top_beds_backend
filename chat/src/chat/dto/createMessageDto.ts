@@ -4,11 +4,11 @@ import { Types } from 'mongoose';
 export class CreateMessageDto {
   @IsNotEmpty()
   @IsString()
-  sender: Types.ObjectId;
+  sender: string;
 
   @IsOptional()
   @IsString()
-  receiver?: Types.ObjectId;
+  receiver?: string;
 
   @IsOptional()
   @IsNotEmpty()
