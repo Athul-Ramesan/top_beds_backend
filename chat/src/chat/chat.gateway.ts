@@ -45,4 +45,26 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect{
     client.emit('reply', 'This is reply')
     this.server.emit('reply' ,message)
    }
+   @SubscribeMessage('chat_request')
+   async handleChatRequest(client:Socket, recieverId:any): Promise<any> {
+    const senderId = client.handshake.query.hostId as string;
+    const senderDetails = await this.chatService.getSenderDetails(senderId)
+    const createChatDto = {
+      participants: [senderId, recieverId],
+      requestStatus:'requested'
+    }
+    const createdChat = await this.chatService.create(createChatDto)
+    const chatId = createdChat._id
+    client.to(recieverId).emit('incoming_request',{senderDetails,chatId})
+   }
+   
+   @SubscribeMessage('accept_request')
+   async handleAcceptRequest(client:Socket, recieverId:any): Promise<any> {
+    const senderId = client.handshake.query.hostId as string;
+    const senderDetails = await this.chatService.getSenderDetails(senderId)
+    const recieverDetails = await this.chatService.getSenderDetails(recieverId)
+    this.onlineUsers.set(recieverId,client.id)
+    this.onlineUsers.delete(senderId)
+    client.to(recieverId).emit('accepted_request',senderDetails,recieverDetails)
+    }
 }
