@@ -19,14 +19,14 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect{
        console.log('New user connected', client.id)
       const hostId = client.handshake.query.hostId as string
       console.log("🚀 ~ ChatGateway ~ handleConnection ~ hostId:", hostId)
-
       if(hostId){
         this.onlineUsers.set(hostId,client.id)
-        
       }
-       this.server.emit('user-joined', {
-        message:`New user joined the chat:${client.id}`
-       })
+      //  this.server.emit('user-joined', {
+      //   message:`New user joined the chat:${client.id}`
+      //  })
+      // this.server.emit("get_online_users",Object.keys(this.onlineUsers))
+      // client.emit("join_chat",())
    }
    
    handleDisconnect(client: Socket) {

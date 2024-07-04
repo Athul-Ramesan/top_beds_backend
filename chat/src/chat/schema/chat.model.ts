@@ -27,11 +27,11 @@ export class Chat {
   })
   status: string;
 
-  @Prop()
-  groupName?: string;
+//   @Prop()
+//   groupName?: string;
 
-  @Prop()
-  groupId?: string;
+//   @Prop()
+//   groupId?: string;
 
   @Prop([{
     participant: { type: MongooseSchema.Types.ObjectId, ref: 'User' },
@@ -39,11 +39,14 @@ export class Chat {
   }])
   lastSeen: { participant: User; seenAt: Date }[];
 
-  @Prop()
-  groupDescription?: string;
+//   @Prop()
+//   groupDescription?: string;
 
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Message' }] })
   messages: Message[];
+
+  @Prop({type:String,enum: ['requested', 'accepted', 'pending']})
+  requestStatus: string;
 }
 
 export const ChatSchema = SchemaFactory.createForClass(Chat);
