@@ -42,7 +42,7 @@ export class User extends Document {
   @Prop()
   password: string;
 
-  @Prop({ required: true, unique: true, index: true })
+  @Prop({ })
   email: string;
 
   @Prop({ enum: ['male', 'female', 'transgender'] })

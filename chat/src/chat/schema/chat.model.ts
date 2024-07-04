@@ -13,34 +13,12 @@ export class Chat {
   })
   participants: User[];
 
-  @Prop({
-    type: String,
-    enum: ['individual', 'group'],
-    default: 'individual',
-  })
-  type: string;
-
-  @Prop({
-    type: String,
-    enum: ['requested', 'active', 'block'],
-    default: 'requested',
-  })
-  status: string;
-
-//   @Prop()
-//   groupName?: string;
-
-//   @Prop()
-//   groupId?: string;
-
   @Prop([{
     participant: { type: MongooseSchema.Types.ObjectId, ref: 'User' },
     seenAt: { type: Date, default: Date.now },
   }])
   lastSeen: { participant: User; seenAt: Date }[];
 
-//   @Prop()
-//   groupDescription?: string;
 
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Message' }] })
   messages: Message[];
