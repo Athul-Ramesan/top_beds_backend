@@ -6,6 +6,7 @@ register({
     addMatchAll: false,
 })
 
+
 import app from "@/presentation"
 import dbConnection from "@/_boot/dbConnection"
 import { runConsumer } from "./infrastructure/messages/kafka/consumer"
