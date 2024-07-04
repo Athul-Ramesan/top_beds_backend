@@ -3,6 +3,7 @@ import { ChatModule } from './chat/chat.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MONGO_CONNECTION } from './app.properties';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
   imports: [
@@ -10,7 +11,9 @@ import { MONGO_CONNECTION } from './app.properties';
     ChatModule,
     ConfigModule.forRoot({
       isGlobal: true,
-    })
+      load:[()=>require('./config')]
+    }),
+    KafkaModule
   ],
   controllers: [],
   providers: [],

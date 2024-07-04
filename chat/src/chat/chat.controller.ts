@@ -6,7 +6,7 @@ import { CreateMessageDto } from './dto/createMessageDto';
 export class ChatController {
 
     constructor(private readonly chatService: ChatService) { }
-    @Post(':senderId/:receiverId')
+    @Post('/send-message/:senderId/:receiverId')
     async sendMessage(
         @Param('senderId') senderId: string,
         @Param('receiverId') receiverId: string,
