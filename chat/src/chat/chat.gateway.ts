@@ -58,6 +58,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect{
     client.to(recieverId).emit('incoming_request',{senderDetails,chatId})
    }
    
+   
    @SubscribeMessage('accept_request')
    async handleAcceptRequest(client:Socket, recieverId:any): Promise<any> {
     const senderId = client.handshake.query.hostId as string;
