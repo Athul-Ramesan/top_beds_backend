@@ -7,12 +7,9 @@ export type ChatDocument = Chat & Document;
 
 @Schema({ timestamps: true })
 export class Chat {
-  @Prop({ type: Types.ObjectId, auto: true })
-  _id: Types.ObjectId;
-  
+
   @Prop({
-    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'User' }],
-    required: true,
+    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'User' }]
   })
   participants: User[];
 
