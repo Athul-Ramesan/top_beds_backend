@@ -10,13 +10,16 @@ export class CreateMessageDto {
   @IsString()
   receiver?: Types.ObjectId;
 
+  @IsOptional()
   @IsNotEmpty()
   @IsString()
   content: string;
 
+  @IsOptional()
   @IsEnum(['text', 'image', 'video', 'audio'])
   contentType: string;
 
+  @IsOptional()
   @IsOptional()
   @IsBoolean()
   receiverSeen?: boolean;
