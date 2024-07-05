@@ -53,7 +53,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect{
       participants: [senderId, recieverId],
       requestStatus:'requested'
     }
-    const createdChat = await this.chatService.create(createChatDto)
+    // const createdChat = await this.chatService.create(createChatDto) 
     // client.to(recieverId).emit('incoming_request',{senderDetails,chatId})
    }
    
