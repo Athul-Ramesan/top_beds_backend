@@ -34,13 +34,13 @@ export class ChatService {
         console.log("🚀 ~ ChatService ~ create ~ newMessageDto:", newMessageDto)
         console.log("🚀 ~ ChatService ~ create ~ createChatDto:", createChatDto)
         try {
-          const { senderId, receiverId } = createChatDto;
+          const { sender, receiver } = newMessageDto;
     
-          if (!senderId || !receiverId) {
+          if (!sender || !receiver) {
             throw new BadRequestException('senderId and receiverId are required');
           }
     
-          const existingChat = await this.getChatBetweenParticipants(senderId, receiverId);
+          const existingChat = await this.getChatBetweenParticipants(sender, receiver);
           if (existingChat) {
             return existingChat;
           }
