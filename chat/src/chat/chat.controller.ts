@@ -17,10 +17,11 @@ export class ChatController {
         const createChatDto = {
             participants: [senderId, receiverId],
         }
+        
         const newMessageDto = {
             ...createMessageDto,
-            senderId,
-            receiverId,
+            sender:senderId,
+            receiver:receiverId,
           };
         const chat = await this.chatService.create(createChatDto,newMessageDto);
         return chat;

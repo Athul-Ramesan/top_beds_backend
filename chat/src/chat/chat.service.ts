@@ -18,14 +18,16 @@ export class ChatService {
     async getChatBetweenParticipants(senderId:string, receiverId:string):Promise<ChatDocument | null>{
         console.log("🚀 ~ ChatService ~ getChatBetweenParticipants ~ receiverId:", receiverId)
         console.log("🚀 ~ ChatService ~ getChatBetweenParticipants ~ senderId:", senderId)
+        const senderObjectId = new Types.ObjectId(senderId);
+        const receiverObjectId = new Types.ObjectId(receiverId);
         const existingChat = await this.chatModel.findOne({
             participants: {
                 $all: [
-                    {$elemMatch:{$eq: senderId}},
-                    {$elemMatch:{$eq: receiverId}}
+                    {$elemMatch:{$eq: senderObjectId}},
+                    {$elemMatch:{$eq: receiverObjectId}}
                 ]
             }
-        }).exec()
+        })
         console.log("🚀 ~ ChatService ~ getChatBetweenParticipants ~ existingChat:", existingChat)
         return existingChat
     }
@@ -35,6 +37,8 @@ export class ChatService {
         console.log("🚀 ~ ChatService ~ create ~ createChatDto:", createChatDto)
         try {
           const { sender, receiver } = newMessageDto;
+          console.log("🚀 ~ ChatService ~ create ~ receiver:", receiver)
+          console.log("🚀 ~ ChatService ~ create ~ sender:", sender)
     
           if (!sender || !receiver) {
             throw new BadRequestException('senderId and receiverId are required');
@@ -42,6 +46,7 @@ export class ChatService {
     
           const existingChat = await this.getChatBetweenParticipants(sender, receiver);
           if (existingChat) {
+            await this.sendMessage(newMessageDto);
             return existingChat;
           }
     
@@ -77,7 +82,7 @@ export class ChatService {
     async sendMessage(createMessageDto: CreateMessageDto): Promise<Message> {
         console.log("🚀 ~ ChatService ~ sendMessage ~ createMessageDto:", createMessageDto)
         try {
-          const { sender, receiver } = createMessageDto;
+          const { sender, receiver,content } = createMessageDto;
     
           if (!sender || !receiver) {
             throw new BadRequestException('Sender and receiver are required');
