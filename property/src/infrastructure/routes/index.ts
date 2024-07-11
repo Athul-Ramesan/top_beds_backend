@@ -16,7 +16,8 @@ export const routes = (dependencies: IDependencies) => {
         deletePropertyPhoto,
         addFacility,
         deleteFacility,
-        getAllFacilities
+        getAllFacilities,
+        searchProperty
      } = controllers(dependencies)
     const router = Router()
 
@@ -45,6 +46,8 @@ export const routes = (dependencies: IDependencies) => {
             .delete(deleteFacility)   
     router.route('/get-property-facility/')
             .get(getAllFacilities)   
+    router.route('/search')
+            .get(searchProperty)   
              
     return router
 };

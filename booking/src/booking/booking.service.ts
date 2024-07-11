@@ -37,12 +37,12 @@ export class BookingService {
       endDate
     )
 
-    
+
     console.log("🚀 ~ BookingService ~ isAvailable:", isAvailable)
 
-      if (!isAvailable) {
-        throw new HttpException('Property is not available for the selected dates',HttpStatus.NOT_FOUND)
-      }
+    if (!isAvailable) {
+      throw new HttpException('Property is not available for the selected dates', HttpStatus.NOT_FOUND)
+    }
 
     const booking = new this.BookingModel({
       property: propertyId,
@@ -85,7 +85,7 @@ export class BookingService {
     console.log("🚀 ~ BookingService ~ confirmBooking ~ property:", property)
     const bookingDetailsForGetPrice = await this.BookingModel.findById(bookingId)
     const totalPrice = bookingDetailsForGetPrice.totalPrice
-    const retrievePayment =await stripeInstance.checkout.sessions.retrieve(session_id)
+    const retrievePayment = await stripeInstance.checkout.sessions.retrieve(session_id)
     console.log("🚀 ~ BookingService ~ confirmBooking ~ retrievePayment:", retrievePayment)
     const paymentIntentId = retrievePayment.payment_intent
     console.log("🚀 ~ BookingService ~ confirmBooking ~ paymentIntentId:", paymentIntentId)
@@ -158,7 +158,7 @@ export class BookingService {
   // }
 
   async checkAvailability(property: Property, startDate: Date, endDate: Date): Promise<boolean> {
-    const availability = property.availability 
+    const availability = property.availability
     for (const range of availability) {
       if (
         (startDate < range.endDate && endDate > range.startDate) &&
@@ -211,15 +211,19 @@ export class BookingService {
     const upcomingBookings = await this.BookingModel.find({
       user: userId,
       startDate: { $gte: currentDate },
-    }).populate('property').populate('user')
+    })
+    .sort({ createdAt: -1 })
+    .populate('property').populate('user')
     console.log("🚀 ~ BookingService ~ getUserBookings ~ upcomingBookings:", upcomingBookings)
     const allBookings = await this.BookingModel.find()
     console.log("🚀 ~ BookingService ~ getUserBookings ~ allBookings:", allBookings)
-    
+
     const completedBookings = await this.BookingModel.find({
       user: userId,
       endDate: { $lt: currentDate },
-    }).populate('property').populate('user')
+    })
+    .sort({ createdAt: -1 })
+    .populate('property').populate('user')
     console.log("🚀 ~ BookingService ~ getUserBookings ~ completedBookings:", completedBookings)
 
     return { upcomingBookings, completedBookings };
@@ -231,17 +235,27 @@ export class BookingService {
     const properties = await this.propertyModel.find({ hostId: hostId });
     const propertyIds = properties.map(property => property._id);
 
+
+    const allBookings = await this.BookingModel.find({ property: { $in: propertyIds } })
+      .sort({ createdAt: -1 })
+      .populate('property', 'title')
+      .exec();
     const upcomingBookings = await this.BookingModel.find({
       property: { $in: propertyIds },
       startDate: { $gte: currentDate },
-    }).populate('property').populate('user')
+    })
+    .sort({ createdAt: -1 })
+    .populate('property').populate('user')
+    console.log("🚀 ~ BookingService ~ getHostBookings ~ upcomingBookings:", upcomingBookings)
 
     const completedBookings = await this.BookingModel.find({
       property: { $in: propertyIds },
       endDate: { $lt: currentDate },
-    }).populate('property').populate('user')
-
-    return { upcomingBookings, completedBookings };
+    })
+    .sort({ createdAt: -1 })
+    .populate('property').populate('user')
+   
+    return { allBookings, upcomingBookings, completedBookings };
   }
   async getBookingById(bookingId: string): Promise<Booking> {
     const booking = await this.BookingModel.findById(bookingId).populate('property').populate('user');
@@ -259,9 +273,9 @@ export class BookingService {
       }
       const refundAmount = Math.round((booking.totalPrice * refundPercentage) / 100);
       console.log("Refund amount:", refundAmount);
-  
+
       const stripeInstance = new Stripe(process.env.STRIPE_SECRET);
-      
+
       let paymentIntent;
       try {
         paymentIntent = await stripeInstance.paymentIntents.retrieve('pi_3PWtBd05vcABQvkG11n1NWK0');
@@ -270,7 +284,7 @@ export class BookingService {
         console.error("Error retrieving PaymentIntent:", stripeError);
         throw new BadRequestException('Invalid PaymentIntent ID');
       }
-  
+
       let refund;
       try {
         refund = await stripeInstance.refunds.create({
@@ -282,10 +296,10 @@ export class BookingService {
         console.error("Error processing refund:", refundError);
         throw new BadRequestException('Failed to process refund');
       }
-  
+
       booking.bookingStatus = 'Cancelled';
       await booking.save();
-  
+
       const property = await this.propertyModel.findById(booking.property._id);
       if (property) {
         property.availability = property.availability.map((slot) => {
@@ -296,10 +310,10 @@ export class BookingService {
         });
         await property.save();
       }
-  
+
       try {
         const { data } = await firstValueFrom(
-          this.httpService.patch('http://localhost:5000/property/update-property-availability', 
+          this.httpService.patch('http://localhost:5000/property/update-property-availability',
             { propertyId: property._id, availability: property.availability }
           ).pipe(
             catchError((error) => {
@@ -316,7 +330,7 @@ export class BookingService {
         }
         console.error("Error in HTTP request:", error);
       }
-  
+
       return { message: 'Booking cancelled and partially refunded successfully', refundAmount };
     } catch (error) {
       console.error("Error in cancelBooking:", error);

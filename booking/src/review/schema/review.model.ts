@@ -10,6 +10,11 @@ export class Review {
   @Prop({ type: Types.ObjectId, ref: 'Property', required: true })
   listing: Types.ObjectId;
 
+  @Prop({ type: Types.ObjectId, ref: 'Property', required: true })
+  bookingId: Types.ObjectId;
+
+
+
   @Prop({ required: true, min: 1, max: 5 })
   rating: number;
 

@@ -3,7 +3,6 @@ import { CronService } from './cron.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/schema/user.model';
 import { CronController } from './cron.controller';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [MongooseModule.forFeature([

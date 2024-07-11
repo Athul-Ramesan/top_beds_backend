@@ -12,7 +12,7 @@ export const getAllProperties = (dependencies: IDependencies) => {
 
 
         try {
-            console.log("🚀😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️ ~ getAllProperties ~ page:", req.query)
+            // console.log("🚀😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️ ~ getAllProperties ~ page:", req.query)
 
             const page = Number(req.query?.page)
             const limit = Number(req.query?.limit)
@@ -25,6 +25,7 @@ export const getAllProperties = (dependencies: IDependencies) => {
             const location = filterOptions?.location;
             const guestCount = filterOptions?.guestCount;
             const priceRange = filterOptions?.priceRange;
+            
 
             const properties = await getAllPropertyUseCase(dependencies).execute(
                 {

@@ -12,6 +12,10 @@ export class CreateReviewDto {
   listing: Types.ObjectId;
 
   @IsNotEmpty()
+  @IsMongoId()
+  bookingId: Types.ObjectId;
+
+  @IsNotEmpty()
   @IsNumber()
   @Min(1)
   @Max(5)

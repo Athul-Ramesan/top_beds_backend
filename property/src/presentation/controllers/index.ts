@@ -9,6 +9,7 @@ import { deletePropertyPhotoController } from "./deletePropertyPhoto";
 import { addFacilityController } from "./editProperty/addFacility";
 import { deleteFacilityController } from "./editProperty/deleteFacility";
 import { getAllFacilitiesController } from "./editProperty/getAllFacilities";
+import { searchPropertyController } from "./searchProperty";
 
 export const controllers = (dependencies:IDependencies)=>{
     
@@ -22,6 +23,7 @@ export const controllers = (dependencies:IDependencies)=>{
         uploadNewImages: addNewPhotosController(dependencies),
         deleteFacility: deleteFacilityController,
         updateProperty :updatePropertyController(dependencies),
+        searchProperty: searchPropertyController,
         deletePropertyPhoto: deletePropertyPhotoController(dependencies),
     }
 }

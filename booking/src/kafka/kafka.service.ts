@@ -110,6 +110,7 @@ export class KafkaService implements OnModuleInit {
 
                     }
                 }
+                
                 if (subscriberMethod === 'propertyCreated') {
                     const property = JSON.parse(value.toString())
                     console.log("🚀 ~ KafkaService ~ onModuleInit ~ property:", property)

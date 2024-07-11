@@ -4,13 +4,7 @@ export interface IProperty{
         title: string;
         description: string;
         hostId:ObjectId
-        location?: {
-          address: string;
-          city: string;
-          state: string;
-          country: string;
-          coordinates: { lat: number; lng: number };
-        };
+        location?: string;
         amenities: string[];
         houseRules: string[];
         price: number;

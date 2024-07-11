@@ -59,7 +59,7 @@ export const getAllPropertyRepository= async(
     }
     
     console.log("🚀 ~ query:", query)
-    const properties = await Property.find(query).skip(skip).limit(limit).sort(sortOption).populate("hostId")
+    const properties = await Property.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit).sort(sortOption).populate("hostId")
     console.log("🚀 ~ getAllPropertyRepository ~ properties:", properties)
     
     if(!properties){

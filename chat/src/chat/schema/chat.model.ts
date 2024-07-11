@@ -11,7 +11,7 @@ export class Chat {
   @Prop({
     type: [{ type: MongooseSchema.Types.ObjectId, ref: 'User' }]
   })
-  participants: User[];
+  participants:Types.ObjectId[];
 
   @Prop([{
     participant: { type: MongooseSchema.Types.ObjectId, ref: 'User' },

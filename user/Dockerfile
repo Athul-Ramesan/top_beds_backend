@@ -1,4 +1,4 @@
-FROM node:17-alpine
+FROM node:alpine
 
 WORKDIR /app
 
@@ -10,8 +10,8 @@ RUN npm install -g typescript
 
 COPY . .
 
-# RUN npm run build
-# uncoment during hosting
+RUN npm run build
+
 
 EXPOSE 3001
 

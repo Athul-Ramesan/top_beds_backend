@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { CreateMessageDto } from './dto/createMessageDto';
 
@@ -25,5 +25,11 @@ export class ChatController {
           };
         const chat = await this.chatService.create(createChatDto,newMessageDto);
         return chat;
+    }
+
+    @Get('get-chats/:senderId')
+    async getChatsBySender(@Param("senderId") senderId:string ){
+        console.log("🚀 ~ ChatController ~ getChatsBySender ~ senderId:", senderId)
+        return this.chatService.getChatsBySender(senderId)
     }
 }

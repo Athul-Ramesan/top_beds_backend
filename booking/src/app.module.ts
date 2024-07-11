@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { CronModule } from './cron/cron.module';
 import { ReviewModule } from './review/review.module';
+import { DashboardController } from './dashboard/dashboard.controller';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 
@@ -22,6 +24,7 @@ import { ReviewModule } from './review/review.module';
     }),
     SubscriptionModule,
     ReviewModule,
+    DashboardModule,
   ],
 })
 export class AppModule {}

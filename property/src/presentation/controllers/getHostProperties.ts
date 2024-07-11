@@ -10,7 +10,6 @@ export const getHostPropertiesController = (dependencies:IDependencies)=>{
         )=>{
             try {
                 
-                
                 const {hostId} = req.params
                 const data = await getHostPropertiesUseCase(dependencies).execute(hostId)
 

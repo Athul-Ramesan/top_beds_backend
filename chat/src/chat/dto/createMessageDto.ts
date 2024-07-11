@@ -1,7 +1,13 @@
 import { IsNotEmpty, IsString, IsBoolean, IsEnum, IsOptional } from 'class-validator';
-import { Types } from 'mongoose';
 
 export class CreateMessageDto {
+
+  
+  @IsOptional()
+  @IsNotEmpty()
+  @IsString()
+  chatId: string;
+  
   @IsNotEmpty()
   @IsString()
   sender: string;
