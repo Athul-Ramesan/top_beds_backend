@@ -6,7 +6,8 @@ import { ObjectId } from "mongoose"
 export interface IUserPayload {
     _id: string,
     email: string,
-    role: string,
+    role?: string,
+    password?:string
 }
 declare global {
     namespace Express {
