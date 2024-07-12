@@ -31,5 +31,7 @@ export interface UserEntity{
     isBlocked?:boolean,
     isGoogle?:boolean,
     profileImage?:string ,
-    subscriptions?: ISubscription
+    subscriptions?: ISubscription,
+    resetPasswordToken?:string,
+    resetPasswordExpires?:Date
 }
