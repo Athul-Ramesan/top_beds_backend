@@ -2,7 +2,6 @@ import dbConnection from "./_boot/dbConnection";
 import { runConsumer } from "./infrastructure/database/messages/kafka/consumer";
 import app from "./presentation";
 
-
 (async()=>{
     try{   
         app
