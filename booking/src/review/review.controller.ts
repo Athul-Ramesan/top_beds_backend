@@ -3,7 +3,7 @@ import { CreateReviewDto } from './dto/createReview.dto';
 import { ReviewService } from './review.service';
 
 
-@Controller('review')
+@Controller('api/booking/review')
 export class ReviewController {
 
     constructor(private readonly reviewService:ReviewService){}

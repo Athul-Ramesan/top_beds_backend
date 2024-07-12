@@ -4,30 +4,37 @@ import { IRoute } from "@/Proxy"
 
 const ROUTES:IRoute[] = [
     {
-        url:'/auth',
+        url:'/api/auth',
         proxy:{
             target:'http://localhost:3000',
             changeOrigin:true
         } 
     },
     {
-        url:'/user',
+        url:'/api/user',
         proxy:{
             target:'http://localhost:3001',
             changeOrigin:true
         } 
     },
     {
-        url:'/property',
+        url:'/api/property',
         proxy:{
             target:'http://localhost:3002',
             changeOrigin:true
         }
     },
     {
-        url:'/booking',
+        url:'/api/booking',
         proxy:{
             target:'http://localhost:3003',
+            changeOrigin:true
+        }
+    },
+    {
+        url:'/api/booking',
+        proxy:{
+            target:'http://localhost:3004',
             changeOrigin:true
         }
     }

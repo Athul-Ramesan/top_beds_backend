@@ -6,6 +6,6 @@ spec:
   selector:
     app: topbeds-booking-service
   ports:
-  - protocol: TCP
-    port: 3003
-    targetPort: 3003
+    - protocol: TCP
+      port: 3003
+      targetPort: 3003

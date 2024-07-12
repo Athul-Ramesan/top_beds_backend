@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name:  topbeds-user-service
+  name: topbeds-user-service
 spec:
   selector:
     app: topbeds-user-service
   ports:
-    protocol: TCP
-    port:  3001
-    targetPort: 3001
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001

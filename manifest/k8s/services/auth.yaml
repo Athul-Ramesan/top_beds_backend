@@ -6,6 +6,6 @@ spec:
   selector:
     app: topbeds-auth-service
   ports:
-  - protocol: TCP
-    port: 3000
-    targetPort: 3000
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
