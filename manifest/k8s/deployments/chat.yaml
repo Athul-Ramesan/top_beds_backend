@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: topbeds-chat-deployment
+  labels:
+    name: topbeds-chat-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: topbeds-chat-service
+  template:
+    metadata:
+      labels:
+        app: topbeds-chat-service
+    spec:
+      containers:
+      - name: topbeds-chat-service
+        image: athulrameshankv/topbeds-chat-service:latest
+        envFrom:
+          - configMapRef:
+              name: chat-service-config

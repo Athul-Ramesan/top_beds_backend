@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: topbeds-auth-deployment
+  labels:
+    name: topbeds-auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: topbeds-auth-service
+  template:
+    metadata:
+      labels:
+        app: topbeds-auth-service
+    spec:
+      containers:
+      - name: topbeds-auth-service
+        image: athulrameshankv/topbeds-authentication-service:latest  
+        envFrom:
+        - configMapRef:
+            name: auth-service-config

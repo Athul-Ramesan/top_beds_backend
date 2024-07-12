@@ -9,12 +9,13 @@ import { CronModule } from './cron/cron.module';
 import { ReviewModule } from './review/review.module';
 import { DashboardController } from './dashboard/dashboard.controller';
 import { DashboardModule } from './dashboard/dashboard.module';
+import config from './config';
 
 
 
 @Module({
   imports: [ 
-    MongooseModule.forRoot(MONGO_CONNECTION),
+    MongooseModule.forRoot(config.urls.mongoUrI),
     BookingModule,
     KafkaModule,
     CronModule,

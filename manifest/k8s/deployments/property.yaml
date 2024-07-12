@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: topbeds-property-deployment
+  labels:
+    name:  topbeds-property-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: topbeds-property-service
+  template:
+    metadata:
+      labels:
+        app: topbeds-property-service
+    spec:
+      containers:
+      - name: topbeds-property-service
+        image: athulrameshankv/topbeds-property-service:latest  
+        envFrom:
+          - configMapRef:
+              name: property-service-config

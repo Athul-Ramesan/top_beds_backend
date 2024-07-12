@@ -6,6 +6,7 @@ export default {
         topic: process.env.KAFKA_TOPIC || "to-chat-service"
     },
     urls:{
-        clientURL: process.env.CLIENT_URL || 'http://localhost:5173'
+        clientURL: process.env.CLIENT_URL || 'http://localhost:5173',
+        mongoUri: process.env.MONGO_CONNECTION || "mongodb+srv://athulrameshankvar:xIL2ZCufhhlyE32Q@cluster0.ncxyvzx.mongodb.net/"
     }
 }

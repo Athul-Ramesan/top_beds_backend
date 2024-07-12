@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: topbeds-user-deployment
+  labels:
+    name:  topbeds-user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: topbeds-user-service
+  template:
+    metadata:
+      labels:
+        app: topbeds-user-service
+    spec:
+      containers:
+      - name: topbeds-user-service
+        image: athulrameshankv/topbeds-user-service:latest  
+        envFrom:
+          - configMapRef:
+              name: user-service-config

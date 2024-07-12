@@ -14,7 +14,7 @@ async function bootstrap() {
   })
   app.use(cookieParser())
   dotenv.config()
-  await app.listen(3003);
+  await app.listen(config.Port.booking);
 }
 
 

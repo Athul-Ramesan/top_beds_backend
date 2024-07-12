@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: topbeds-booking-deployment
+  labels:
+    name: topbeds-booking-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: topbeds-booking-service
+  template:
+    metadata:
+      labels:
+        app: topbeds-booking-service
+    spec:
+      containers:
+      - name: topbeds-booking-service
+        image: athulrameshankv/topbeds-booking-service:latest  
+        envFrom:
+        - configMapRef:
+            name: booking-service-config
