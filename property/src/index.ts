@@ -19,7 +19,6 @@ import { runConsumer } from "./infrastructure/messages/kafka/consumer"
         console.error(error,"_____failed to config property service ");
         
     }finally{
-        
         process.on("SIGINT", () => { 
             console.log("\n\n server is shutting down")
             process.exit();  
