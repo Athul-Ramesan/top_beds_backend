@@ -25,6 +25,7 @@ import { runConsumer } from "./infrastructure/messages/kafka/consumer"
             process.exit();  
           });
     }
+    
 })()
 
 
