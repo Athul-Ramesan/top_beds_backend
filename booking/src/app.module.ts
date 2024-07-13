@@ -15,7 +15,7 @@ import config from './config';
 
 @Module({
   imports: [ 
-    MongooseModule.forRoot(config.urls.mongoUrI),
+    MongooseModule.forRoot("mongodb+srv://athulrameshankvar:<password>@cluster0.n4mjixy.mongodb.net/"),
     BookingModule,
     KafkaModule,
     CronModule,
