@@ -21,7 +21,7 @@ export const changeHostStatusController = (
         try {
             
             const result = await changeHostStatus(_id, hostStatus)
-            const response = await axios.patch('http://localhost:5000/auth/change-host-status', 
+            const response = await axios.patch('https://topbeds.smasher.shop/api/auth/change-host-status', 
                 {_id: _id, hostStatus: hostStatus}, 
                 {
                     headers: {
