@@ -9,6 +9,10 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
+  tls:
+  - hosts:
+    - topbeds.smasher.shop
+    secretName: my-tls-secret
   rules:
   - host: topbeds.smasher.shop
     http:
