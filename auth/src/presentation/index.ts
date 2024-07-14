@@ -13,7 +13,7 @@ const app: Application = express()
 const PORT: number = Number(process.env.PORT)
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://topbeds-frontend.vercel.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }
