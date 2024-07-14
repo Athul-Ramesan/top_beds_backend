@@ -6,12 +6,11 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/enable-cors: "true" 
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://smasher.shop"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   rules:
-  - host: smasher.shop
-    http:
+   - http:
       paths:
       - path: /api/auth
         pathType: Prefix
