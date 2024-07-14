@@ -35,11 +35,13 @@ export class KafkaService implements OnModuleInit {
         });
     }
     async onModuleInit() {
+        console.log('connecting kafka of chat service')
         this.consumer = this.kafka.consumer({
             groupId: this.configService.get<string>("KAFKA_GROUP_ID"),
         });
 
         await this.consumer.connect();
+        console.log('connected kafka chat service')
         await this.consumer.subscribe({
             topic: this.configService.get<string>("KAFKA_TOPIC"),
             fromBeginning: true
