@@ -35,21 +35,28 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: topbeds-notification-service
+            name: topbeds-property-service
             port:
               number: 3002
       - path: /api/booking
         pathType: Prefix
         backend:
           service:
-            name: topbeds-course-service
+            name: topbeds-booking-service
             port:
               number: 3003
       - path: /api/chat
         pathType: Prefix
         backend:
           service:
-            name: topbeds-payment-service
+            name: topbeds-chat-service
             port:
               number: 3004
+      - path: /socket.io
+        pathType: Prefix
+        backend:
+          service:
+            name: topbeds-chat-service
+            port:
+            number: 3004           
 
