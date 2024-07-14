@@ -58,5 +58,5 @@ spec:
           service:
             name: topbeds-chat-service
             port:
-            number: 3004           
+              number: 3004           
 
