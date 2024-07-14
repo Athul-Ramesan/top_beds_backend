@@ -13,13 +13,6 @@ spec:
   - host: smasher.shop
     http:
       paths:
-      - path:
-        pathType: Prefix
-        backend:
-          service:
-            name: topbeds-frontend-service
-            port:
-              number: 5173
       - path: /api/auth
         pathType: Prefix
         backend:
