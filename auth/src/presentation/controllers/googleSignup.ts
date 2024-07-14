@@ -28,8 +28,8 @@ export const googleSignupOrLogin = (dependencies: IDependencies) => {
                 email: result?.email!,
                 role: String(result?.role)
             })
-            res.cookie("access_token", accessToken, { httpOnly: true })
-            res.cookie("refresh_token", refreshToken, { httpOnly: true })
+            res.cookie("access_token", accessToken, { httpOnly: true , secure:true, sameSite:"none"})
+            res.cookie("refresh_token", refreshToken,  { httpOnly: true , secure:true, sameSite:"none"})
             res.status(201).json({ result })
         } catch (error: any) {
             res.status(400).json({status:false, message: error.message })

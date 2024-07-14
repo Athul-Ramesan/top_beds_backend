@@ -54,8 +54,8 @@
 
 //                     res.cookie('access_token', newAccessToken, {
 //                         httpOnly: true,
-//                         secure: process.env.NODE_ENV === 'production', // only send cookie over HTTPS in production
-//                         sameSite: 'strict', // strict same-site policy
+//                         secure: true, // only send cookie over HTTPS in production
+//                         sameSite: 'none', // strict same-site policy
 //                     });
 
 //                     req.user = payload;

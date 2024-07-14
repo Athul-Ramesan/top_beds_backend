@@ -56,8 +56,8 @@ export const signupController = (dependencies: IDependencies) => {
                 role: result?.role!
             })
             console.log(accessToken);
-            res.cookie("access_token", accessToken, { httpOnly: true })
-            res.cookie("refresh_token", refreshToken, { httpOnly: true })
+            res.cookie("access_token", accessToken, { httpOnly: true , secure:true, sameSite:"none"})
+            res.cookie("refresh_token", refreshToken,  { httpOnly: true , secure:true, sameSite:"none"})
             console.log(result, ">>>>>>>>>>>>>>>>>result");
 
             res.status(201).json({ result })
