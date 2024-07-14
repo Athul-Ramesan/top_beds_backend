@@ -47,6 +47,8 @@ export const routes = (dependencies: IDependencies) => {
         .post(updateSubscriptionDataController)  
     router.route('/update-booking-data')
         .post(updateBookingController)  
+    router.route('/reset-password/:token')
+        .post(resetPassword)  
 
     return router
 }
