@@ -14,12 +14,23 @@ config()
 const app: Application = express()
 const PORT: number = Number(process.env.PORT)
 
+// const corsOptions = {
+//     origin: 'https://topbeds.vercel.app',
+//     methods: ['POST','HEAD','PUT','PATCH','GET','DELETE'],
+//     credentials: true,
+// }
+// app.use(cors(corsOptions));
 const corsOptions = {
     origin: 'https://topbeds.vercel.app',
-    methods: ['POST','HEAD','PUT','PATCH','GET','DELETE'],
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     credentials: true,
-}
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 app.use(cors(corsOptions));
+
+// Preflight request handling
+app.options('*', cors(corsOptions));
 
 app.use(express.json(
     { limit: '100mb' }
