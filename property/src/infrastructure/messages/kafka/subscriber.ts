@@ -1,5 +1,6 @@
 import {becomeHostConsumer} from "./consumer/becomeHostConsumer"
 import { profileImageUpdatedConsumer } from "./consumer/profileImageUpdatedConsumer"
+import { updateUserDataConsumer } from "./consumer/updateUserDataConsumer"
 import {userCreatedConsumer} from "./consumer/userCreatedConsumer"
 import { userStatusUpdatedConsumer } from "./consumer/userStatusUpdated"
 
