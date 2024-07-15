@@ -6,7 +6,9 @@ import { ChatService } from './chat.service';
 
 @WebSocketGateway({
   cors: {
-    origin: '*'
+    origin: 'https://topbeds.vercel.app',
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    credentials: true,
   },
 })
 
