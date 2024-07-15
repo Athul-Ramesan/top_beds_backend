@@ -8,6 +8,7 @@ export const createSubscriber = ()=>{
         userCreated: userCreatedConsumer,
         becomeHost: becomeHostConsumer,
         profileImageUpdate: profileImageUpdatedConsumer,
-        userStatusUpdate: userStatusUpdatedConsumer
+        userStatusUpdate: userStatusUpdatedConsumer,
+        updateUserData: updateUserDataConsumer
     }
 }
