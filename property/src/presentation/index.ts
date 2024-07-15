@@ -16,7 +16,7 @@ const PORT: number = Number(process.env.PORT)
 
 const corsOptions = {
     origin: 'https://topbeds.vercel.app',
-    methods: ['POST,HEAD,PUT,PATCH,GET,DELETE'],
+    methods: ['POST','HEAD','PUT','PATCH','GET','DELETE'],
     credentials: true,
 }
 app.use(cors(corsOptions));
