@@ -17,6 +17,7 @@ export const deletePropertyPhotoController = (dependencies: IDependencies) => {
                 throw new customError('No data provided',400)
             }
             const updatedProperty = await deletePropertyPhotoUseCase(dependencies).execute(String(propertyId),String(image))
+            console.log("🚀 ~ return ~ updatedProperty:", updatedProperty)
             
             propertyImageDeletedProducer(String(propertyId), String(image))
             res.status(200).json({
