@@ -42,13 +42,13 @@ export class ChatService {
   async getChatsBySender(senderId: string) {
     const result = await this.chatModel.find({ participants: senderId })
       .populate('participants')
-      // .populate({
-      //   path: 'messages',
-      //   populate: [
-      //     { path: 'sender', },  
-      //     { path: 'receiver', }
-      //   ],
-      // })
+      .populate({
+        path: 'messages',
+        populate: [
+          { path: 'sender', },  
+          { path: 'receiver', }
+        ],
+      })
       .sort({ 'messages.createdAt': -1 });
     console.log("🚀 ~ ChatService ~ getChatsBySender ~ result:", result)
     return result
