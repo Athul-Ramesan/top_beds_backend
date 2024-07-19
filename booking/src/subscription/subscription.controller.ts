@@ -15,7 +15,7 @@ export class SubscriptionController {
 
     return this.subscriptionService.create(createSubscriptionPlanDto);
   }
-  @Get('')
+  @Get('get')
   findAll() {
     return this.subscriptionService.findAll();
   }
