@@ -97,8 +97,9 @@ export class ChatService {
   async updateUserData(_id:string, payload:any){
     console.log("🚀 ~ ChatService ~ updateUserData ~ _id:", _id)
     console.log("🚀 ~ ChatService ~ updateUserData ~ payload:", payload)
+    const { _id: payloadId, ...updateData } = payload;
     
-    return this.userModel.findByIdAndUpdate(_id, payload, {new: true})
+    return this.userModel.findByIdAndUpdate(_id, updateData, {new: true})
   }
   async createUser (userData:UserDocument){
     return this.userModel.create(userData)
