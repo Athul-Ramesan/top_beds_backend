@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import userCreatedProducer from "../../infrastructure/database/messages/kafka/producers/userCreatedProducer";
 import { generateTokens } from "../jwt/generateTwoTokens";
 import { User } from "../../infrastructure/database/models";
+import axios from "axios";
 
 export const handleGoogleSignupOrLogin = async (dependencies: IDependencies, req: Request, res: Response) => {
     const {
@@ -30,6 +31,17 @@ export const handleGoogleSignupOrLogin = async (dependencies: IDependencies, req
         result = await dependencies.useCases.googleSingupOrLoginUseCase(dependencies).execute(
             { firstName, lastName, profileImage, email, isGoogle }
         );
+        const chatResponse = await axios.post(`http://topbeds.smasher.shop/api/chat/create-user`, result,
+            {
+                headers:
+                {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            })
+            console.log(chatResponse, 'user created response from chat' )
+            
+
         userCreatedProducer(result);
     } else {
         result = existingUser;

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { CreateMessageDto } from './dto/createMessageDto';
+import { UserDocument } from './schema/user.model';
 
 @Controller('api/chat')
 export class ChatController {
@@ -17,19 +18,34 @@ export class ChatController {
         const createChatDto = {
             participants: [senderId, receiverId],
         }
-        
+
         const newMessageDto = {
             ...createMessageDto,
-            sender:senderId,
-            receiver:receiverId,
-          };
-        const chat = await this.chatService.create(createChatDto,newMessageDto);
+            sender: senderId,
+            receiver: receiverId,
+        };
+        const chat = await this.chatService.create(createChatDto, newMessageDto);
         return chat;
     }
 
     @Get('get-chats/:senderId')
-    async getChatsBySender(@Param("senderId") senderId:string ){
+    async getChatsBySender(@Param("senderId") senderId: string) {
         console.log("🚀 ~ ChatController ~ getChatsBySender ~ senderId:", senderId)
         return this.chatService.getChatsBySender(senderId)
     }
+
+    @Post('/update-user-data/:_id/')
+    async updateUserData(
+        @Param('_id') _id: string,
+        @Body() payload:any
+    ) {
+        return this.chatService.updateUserData(_id, payload)
+    }
+    @Post('/create-user')
+    async createUser(
+        @Body() user:UserDocument
+    ) {
+        return this.chatService.createUser(user)
+    }
+    
 }

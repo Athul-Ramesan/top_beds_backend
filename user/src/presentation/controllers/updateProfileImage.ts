@@ -40,6 +40,15 @@ export const updateProfileImageController = (
                     withCredentials: true
                 })
                 console.log(response, 'update profile image response')
+            const chatResponse = await axios.post(`http://topbeds.smasher.shop/api/chat/update-user-data/${_id}`, payload,
+                {
+                    headers:
+                    {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                })
+                console.log(chatResponse, 'update profile image response from chat' )
                 
             res.status(200).json({ status: "ok", data: result, message: "Profile Image Updated" })
         } catch (error: any) {

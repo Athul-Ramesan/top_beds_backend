@@ -91,4 +91,13 @@ export class ChatService {
   async getSenderDetails(senderId: string) {
     return this.userModel.findById(senderId);
   }
+
+  //user 
+
+  async updateUserData(_id:string, payload:any){
+    return this.userModel.findByIdAndUpdate(_id, payload, {new: true})
+  }
+  async createUser (userData:UserDocument){
+    return this.userModel.create(userData)
+  }
 }
