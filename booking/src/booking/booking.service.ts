@@ -5,8 +5,10 @@ import axios from 'axios';
 import { Model, Types } from 'mongoose';
 import { catchError, firstValueFrom } from 'rxjs';
 import { BookingException } from 'src/booking.exception';
+import { MailerService } from 'src/mailer.service';
 import { Booking, BookingDocument } from 'src/schema/bookings.model';
 import { Property, PropertyDocument } from 'src/schema/property.model';
+import { User, UserDocument } from 'src/schema/user.model';
 import { SubscriptionUpdateException } from 'src/subscription/subscription.exception';
 import Stripe from 'stripe';
 
@@ -16,6 +18,8 @@ export class BookingService {
     @InjectModel(Booking.name) private BookingModel: Model<BookingDocument>,
 
     @InjectModel(Property.name) private propertyModel: Model<PropertyDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private mailerService: MailerService,
     private httpService: HttpService
   ) { }
 
@@ -96,33 +100,8 @@ export class BookingService {
 
     await this.updatePropertyAvailability(property, startDate, endDate, false)
 
-
-
-    // try {
-    //         const response = await axios.patch('http://localhost:5000/property/update-property-availability', 
-    //             {propertyId: property._id, availability: property.availability}, 
-    //             {
-    //                 headers: {
-    //                     "Content-Type": "application/json"
-    //                 },
-    //                 withCredentials: true,
-    //             }
-    //         );
-
-
-    //         console.log("🚀 ~ BookingController ~ response:", response.data);
-    //     } catch (error) {
-    //         if (axios.isAxiosError(error)) {
-    //             console.error("Axios error:", error.response?.data || error.message);
-    //         } else {
-    //             console.error("Error updating property availability:", error);
-    //         }
-    //         throw new BadRequestException('Failed to update property availability');
-    //     }
-
-
-
-
+    const user = await this.userModel.findById(booking.user);
+    await this.mailerService.sendBookingConfirmation(booking, user.email);
     try {
       const property = await this.propertyModel.findById(propertyId)
       const { data } = await firstValueFrom(
@@ -143,20 +122,6 @@ export class BookingService {
   }
 
 
-  // async checkAvailability(property: Property, startDate: Date, endDate: Date): Promise<boolean> {
-  //     const availability = property.availability;
-
-  //     for (const range of availability) {
-  //         if ((startDate >= range.startDate && startDate < range.endDate && range.available) || (
-  //             endDate > range.startDate && endDate <= range.endDate && range.available
-  //         )) {
-  //             console.log('inside availability checking👉👉👉👉👉👉👉')
-  //             return false
-  //         }
-  //     }
-  //     return true
-  // }
-
   async checkAvailability(property: Property, startDate: Date, endDate: Date): Promise<boolean> {
     const availability = property.availability
     for (const range of availability) {
@@ -168,7 +133,7 @@ export class BookingService {
         return false; // Unavailable
       }
     }
-    return true; // Available
+    return true; 
   }
 
 
