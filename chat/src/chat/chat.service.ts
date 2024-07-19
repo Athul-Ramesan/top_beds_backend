@@ -97,7 +97,10 @@ export class ChatService {
   async updateUserData(_id:string, payload:any){
     console.log("🚀 ~ ChatService ~ updateUserData ~ _id:", _id)
     console.log("🚀 ~ ChatService ~ updateUserData ~ payload:", payload)
-    const { _id: payloadId, ...updateData } = payload;
+    const { payload: userPayload } = payload;
+
+  // Now destructure the user data, omitting _id
+  const { _id: payloadId, ...updateData } = userPayload;
     
     return this.userModel.findByIdAndUpdate(_id, updateData, {new: true})
   }
