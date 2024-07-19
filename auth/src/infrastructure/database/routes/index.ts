@@ -20,7 +20,8 @@ export const routes = (dependencies: IDependencies) => {
         verifyOtp,
         getUserData,
         forgotPassword,
-        resetPassword
+        resetPassword,
+        updateUserData
     } = controllers(dependencies);
 
     const router = Router();
@@ -49,6 +50,8 @@ export const routes = (dependencies: IDependencies) => {
         .post(updateBookingController)  
     router.route('/reset-password/:token')
         .post(resetPassword)  
+    router.route('/update-user-data/:_id')
+        .post(updateUserData)  
 
     return router
 }

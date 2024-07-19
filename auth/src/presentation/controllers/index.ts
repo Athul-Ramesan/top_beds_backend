@@ -7,6 +7,7 @@ import { logoutController } from "./logout";
 import { resetPasswordController } from "./resetPassword";
 import { sendOtpController } from "./sendOtp";
 import { signupController } from "./signup";
+import { updateUserDataController } from "./updateUserData";
 import { verifyOtpController } from "./verifyAccount";
 
 export const controllers = (dependencies: IDependencies)=>{
@@ -19,6 +20,7 @@ export const controllers = (dependencies: IDependencies)=>{
         sendOtp:sendOtpController(dependencies),
         verifyOtp:verifyOtpController(dependencies),
         getUserData:getUserDataController(dependencies),
+        updateUserData: updateUserDataController,
         forgotPassword: forgotPasswordController(dependencies),
         resetPassword: resetPasswordController(dependencies)
     }
