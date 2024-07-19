@@ -126,7 +126,7 @@ export class BookingService {
     try {
       const property = await this.propertyModel.findById(propertyId)
       const { data } = await firstValueFrom(
-        this.httpService.patch('http://localhost:5000/property/update-property-availability', { propertyId: property._id, availability: property.availability }).pipe(
+        this.httpService.patch('http://topbeds.smasher.shop/api/property/update-property-availability', { propertyId: property._id, availability: property.availability }).pipe(
           catchError((error) => {
             throw new SubscriptionUpdateException(`Failed to update subscription: ${error.response?.data?.message || error.message}`);
           })
@@ -313,7 +313,7 @@ export class BookingService {
 
       try {
         const { data } = await firstValueFrom(
-          this.httpService.patch('http://localhost:5000/property/update-property-availability',
+          this.httpService.patch('http://topbeds.smasher.shop/api/property/update-property-availability',
             { propertyId: property._id, availability: property.availability }
           ).pipe(
             catchError((error) => {
