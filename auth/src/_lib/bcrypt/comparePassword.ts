@@ -1,4 +1,4 @@
-import { compare } from "bcrypt"
+import { compare } from "bcryptjs"
 
 export const comparePassword =async (passwordInput: string, passwordDB: string) => {
     try {
