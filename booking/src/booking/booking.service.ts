@@ -258,7 +258,7 @@ export class BookingService {
     return { allBookings, upcomingBookings, completedBookings };
   }
   async getBookingById(bookingId: string): Promise<Booking> {
-    const booking = await this.BookingModel.findById( new Types.ObjectId(bookingId)).populate('property').populate('user');
+    const booking = await this.BookingModel.findById( new Types.ObjectId(bookingId.trim())).populate('property').populate('user');
     if (!booking) {
       throw new NotFoundException('Booking not found');
     }
