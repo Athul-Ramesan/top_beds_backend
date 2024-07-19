@@ -16,6 +16,6 @@ import { HttpModule } from '@nestjs/axios';
   ],
   controllers: [SubscriptionController],
   providers: [SubscriptionService],
-  exports: [SubscriptionService],
+  // exports: [SubscriptionService],
 })
 export class SubscriptionModule {}
