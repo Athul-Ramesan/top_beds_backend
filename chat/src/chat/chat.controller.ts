@@ -39,6 +39,7 @@ export class ChatController {
         @Param('_id') _id: string,
         @Body() payload:any
     ) {
+        console.log("🚀 ~ ChatController ~ payload:", payload)
         return this.chatService.updateUserData(_id, payload)
     }
     @Post('/create-user')
