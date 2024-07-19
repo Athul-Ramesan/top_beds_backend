@@ -105,6 +105,9 @@ export class BookingController {
     }
     @Get(':bookingId')
     async getBooking(@Param('bookingId') bookingId: string) {
+    console.log("🚀 ~ BookingController ~ getBooking ~ bookingId:🥶🥶🥶🥶🥶", bookingId)
+
+        
       return this.bookingService.getBookingById(bookingId.trim());
     }
 
