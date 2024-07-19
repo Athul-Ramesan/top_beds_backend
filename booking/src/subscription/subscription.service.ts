@@ -138,8 +138,8 @@ export class SubscriptionService {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'http://topbeds.smasher.shop/api/user/subscription-payment-succes/{CHECKOUT_SESSION_ID}',
-      cancel_url: "http://topbeds.smasher.shop/index/cancel-subscription-payment"
+      success_url: 'https://topbeds.vercel.app/subscription-payment-succes/{CHECKOUT_SESSION_ID}',
+      cancel_url: "https://topbeds.vercel.app/subscription-payment-succes/{CHECKOUT_SESSION_ID}"
     })
     return session.id
   }

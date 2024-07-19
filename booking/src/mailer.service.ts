@@ -66,7 +66,7 @@ export class MailerService {
                 </div>
                 <div class="booking-item">
                   <span class="label">Total Price:</span>
-                  <span class="value">$${booking.totalPrice.toFixed(2)}</span>
+                  <span class="value">₹${booking.totalPrice.toFixed(2)}</span>
                 </div>
               </div>
               <p>Thank you for choosing our service!</p>
