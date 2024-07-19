@@ -5,6 +5,7 @@ import { generateAccesstoken } from "../../_lib/jwt/generateAccesstoken";
 import { UserEntity } from "../../domain/entities";
 import { generateRefreshToken } from "../../_lib/jwt/generateRefreshToken";
 import userCreatedProducer from "../../infrastructure/database/messages/kafka/producers/userCreatedProducer";
+import axios from "axios";
 
 
 interface UserData {
@@ -39,6 +40,15 @@ export const signupController = (dependencies: IDependencies) => {
             if (!result) {
                 throw new Error("User creation failed")
             }
+            const chatResponse = await axios.post(`http://topbeds.smasher.shop/api/chat/create-user`, result,
+                {
+                    headers:
+                    {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                })
+                console.log(chatResponse, 'user created response from chat' )
             userCreatedProducer(result).then(res=>{
                 console.log('res');
                 console.log('inside userCreated producer calling');

@@ -6,6 +6,7 @@ import { signupValidation } from "../../_lib/validation";
 import { generateAccesstoken } from "../../_lib/jwt/generateAccesstoken";
 import { generateRefreshToken } from "../../_lib/jwt/generateRefreshToken";
 import userCreatedProducer from "../../infrastructure/database/messages/kafka/producers/userCreatedProducer";
+import axios from "axios";
 
 export const verifyOtpController = (dependencies:IDependencies)=>{
 
@@ -28,6 +29,15 @@ export const verifyOtpController = (dependencies:IDependencies)=>{
                 if (!result) {
                     throw new Error("User creation failed")
                 }
+                const chatResponse = await axios.post(`http://topbeds.smasher.shop/api/chat/create-user`, result,
+                    {
+                        headers:
+                        {
+                            'Content-Type': 'application/json'
+                        },
+                        withCredentials: true
+                    })
+                    console.log(chatResponse, 'user created response from chat' )
                 await userCreatedProducer(result)
                 const accessToken = generateAccesstoken({
                     _id: String(result._id),
