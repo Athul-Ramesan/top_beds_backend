@@ -7,13 +7,14 @@ export class MailerService {
 
   constructor() {
     this.transporter = createTransport({
-      host: 'smtp.example.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
+        service: 'gmail',
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+            user: "dev.athulrameshan@gmail.com",
+            pass: process.env.GOOGLE_PASSWORD
+        }
     });
   }
 

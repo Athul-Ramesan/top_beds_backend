@@ -11,5 +11,8 @@ export default {
     },
     Port:{
         booking: process.env.PORT || 3003
+    },
+    google:{
+        password: process.env.GOOGLE_PASSWORD || sobd zzhf wlgc jcaf
     }
 }
