@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { BadRequestException, HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import axios from 'axios';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { catchError, firstValueFrom } from 'rxjs';
 import { BookingException } from 'src/booking.exception';
 import { Booking, BookingDocument } from 'src/schema/bookings.model';
@@ -258,7 +258,7 @@ export class BookingService {
     return { allBookings, upcomingBookings, completedBookings };
   }
   async getBookingById(bookingId: string): Promise<Booking> {
-    const booking = await this.BookingModel.findById(bookingId).populate('property').populate('user');
+    const booking = await this.BookingModel.findById( new Types.ObjectId(bookingId)).populate('property').populate('user');
     if (!booking) {
       throw new NotFoundException('Booking not found');
     }
