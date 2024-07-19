@@ -31,7 +31,7 @@ export class SubscriptionService {
   }
 
   async findOne(id: string): Promise<SubscriptionPlan> {
-    const plan = await this.subscriptionPlanModel.findById(new Types.ObjectId(id)).exec();
+    const plan = await this.subscriptionPlanModel.findById(id).exec();
     if (!plan) {
       throw new NotFoundException(`Subscription plan with ID "${id}" not found`);
     }
@@ -40,7 +40,7 @@ export class SubscriptionService {
 
   async update(id: string, updateSubscriptionPlanDto: UpdateSubscriptionPlanDto): Promise<SubscriptionPlan> {
     const updatedPlan = await this.subscriptionPlanModel
-      .findByIdAndUpdate(new Types.ObjectId(id), updateSubscriptionPlanDto, { new: true })
+      .findByIdAndUpdate(id, updateSubscriptionPlanDto, { new: true })
       .exec();
     if (!updatedPlan) {
       throw new NotFoundException(`Subscription plan with ID "${id}" not found`);
@@ -49,7 +49,7 @@ export class SubscriptionService {
   }
 
   async remove(id: string): Promise<SubscriptionPlan> {
-    const deletedPlan = await this.subscriptionPlanModel.findByIdAndDelete(new Types.ObjectId(id)).exec();
+    const deletedPlan = await this.subscriptionPlanModel.findByIdAndDelete(id).exec();
     if (!deletedPlan) {
       throw new NotFoundException(`Subscription plan with ID "${id}" not found`);
     }
@@ -58,11 +58,11 @@ export class SubscriptionService {
 
   async subscribe(userId: string, planId: string, session_id: string): Promise<User> {
 
-    const user = await this.userModel.findById(new Types.ObjectId(userId)).exec();
+    const user = await this.userModel.findById(userId).exec();
     if (!user) {
       throw new NotFoundException(`User with ID "${userId}" not found`);
     }
-    const plan = await this.subscriptionPlanModel.findById(new Types.ObjectId(planId)).exec();
+    const plan = await this.subscriptionPlanModel.findById(planId).exec();
     if (!plan) {
       throw new NotFoundException(`Subscription plan with ID "${planId}" not found`);
     }
@@ -78,7 +78,7 @@ export class SubscriptionService {
 
     const result = await this.userModel.updateOne(
       {
-        _id: new Types.ObjectId(userId),
+        _id: userId,
         'subscription.plan': { $ne: newSubscription.plan }
       },
       {
@@ -89,7 +89,7 @@ export class SubscriptionService {
     if (result.modifiedCount === 0) {
       await this.userModel.updateOne(
         {
-          _id:  new Types.ObjectId(userId),
+          _id:  userId,
           'subscription.plan': newSubscription.plan
         },
         {
@@ -101,12 +101,12 @@ export class SubscriptionService {
     }
     const updatedUser = await this.userModel.findById(userId);
     const payload = {
-      id:  new Types.ObjectId(userId),
+      id:  userId,
       subscriptionData: newSubscription
     };
     try {
       const { data } = await firstValueFrom(
-        this.httpService.post('http://localhost:5000/auth/update-subscription-data', payload).pipe(
+        this.httpService.post('http://topbeds.smasher.shop/api/auth/update-subscription-data', payload).pipe(
           catchError((error) => {
             throw new SubscriptionUpdateException(`Failed to update subscription: ${error.response?.data?.message || error.message}`);
           })
@@ -138,8 +138,8 @@ export class SubscriptionService {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'http://localhost:5173/user/subscription-payment-succes/{CHECKOUT_SESSION_ID}',
-      cancel_url: "http://localhost:5173/index/cancel-subscription-payment"
+      success_url: 'http://topbeds.smasher.shop/api/user/subscription-payment-succes/{CHECKOUT_SESSION_ID}',
+      cancel_url: "http://topbeds.smasher.shop/index/cancel-subscription-payment"
     })
     return session.id
   }
