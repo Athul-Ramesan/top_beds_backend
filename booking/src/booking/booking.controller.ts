@@ -105,7 +105,7 @@ export class BookingController {
     }
     @Get(':bookingId')
     async getBooking(@Param('bookingId') bookingId: string) {
-      return this.bookingService.getBookingById(bookingId);
+      return this.bookingService.getBookingById(bookingId.trim());
     }
 
   @Post('cancel/:bookingId')
