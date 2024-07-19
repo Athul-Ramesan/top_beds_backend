@@ -7,6 +7,7 @@ import { comparePassword } from "@/lib/services/comparePassword"
 import { getUserDataById } from "@/lib/services/getUserData"
 import { hashPassword } from "@/lib/services/hashPassword"
 import { addressValidation } from "@/lib/validation/addressValidation"
+import axios from "axios"
 import { NextFunction, Request, Response } from "express"
 import { customError } from "topbeds-package"
 
@@ -69,6 +70,15 @@ export const updateUserDataController = (
             if (!data) {
                 throw new customError("Couldn't get properties", 404);
             }
+            const response = await axios.post(`http://topbeds.smasher.shop/api/auth/update-user-data/${_id}`, {payload},
+                {
+                    headers:
+                    {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                })
+                console.log(response, 'update user data response')
             updateUserProducer(_id,payload)
             res.status(200).json({ status: "ok", updatedUserData:data, message: "user updated" })
         } catch (error: any) {
