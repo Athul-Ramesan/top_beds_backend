@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 import { SubscriptionPlan } from './schemas/subscriptionPlans.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateSubscriptionPlanDto } from './dto/createSubscriptionPlanDto';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { UpdateSubscriptionPlanDto } from './dto/updateSubscriptionPlan.dto';
 import { subscribeDto } from './dto/subscribeDto';
 import { User, UserDocument } from 'src/schema/user.model';
@@ -31,7 +31,7 @@ export class SubscriptionService {
   }
 
   async findOne(id: string): Promise<SubscriptionPlan> {
-    const plan = await this.subscriptionPlanModel.findById(id).exec();
+    const plan = await this.subscriptionPlanModel.findById(new Types.ObjectId(id)).exec();
     if (!plan) {
       throw new NotFoundException(`Subscription plan with ID "${id}" not found`);
     }
@@ -40,7 +40,7 @@ export class SubscriptionService {
 
   async update(id: string, updateSubscriptionPlanDto: UpdateSubscriptionPlanDto): Promise<SubscriptionPlan> {
     const updatedPlan = await this.subscriptionPlanModel
-      .findByIdAndUpdate(id, updateSubscriptionPlanDto, { new: true })
+      .findByIdAndUpdate(new Types.ObjectId(id), updateSubscriptionPlanDto, { new: true })
       .exec();
     if (!updatedPlan) {
       throw new NotFoundException(`Subscription plan with ID "${id}" not found`);
@@ -49,7 +49,7 @@ export class SubscriptionService {
   }
 
   async remove(id: string): Promise<SubscriptionPlan> {
-    const deletedPlan = await this.subscriptionPlanModel.findByIdAndDelete(id).exec();
+    const deletedPlan = await this.subscriptionPlanModel.findByIdAndDelete(new Types.ObjectId(id)).exec();
     if (!deletedPlan) {
       throw new NotFoundException(`Subscription plan with ID "${id}" not found`);
     }
@@ -58,11 +58,11 @@ export class SubscriptionService {
 
   async subscribe(userId: string, planId: string, session_id: string): Promise<User> {
 
-    const user = await this.userModel.findById(userId).exec();
+    const user = await this.userModel.findById(new Types.ObjectId(userId)).exec();
     if (!user) {
       throw new NotFoundException(`User with ID "${userId}" not found`);
     }
-    const plan = await this.subscriptionPlanModel.findById(planId).exec();
+    const plan = await this.subscriptionPlanModel.findById(new Types.ObjectId(planId)).exec();
     if (!plan) {
       throw new NotFoundException(`Subscription plan with ID "${planId}" not found`);
     }
@@ -78,7 +78,7 @@ export class SubscriptionService {
 
     const result = await this.userModel.updateOne(
       {
-        _id: userId,
+        _id: new Types.ObjectId(userId),
         'subscription.plan': { $ne: newSubscription.plan }
       },
       {
@@ -89,7 +89,7 @@ export class SubscriptionService {
     if (result.modifiedCount === 0) {
       await this.userModel.updateOne(
         {
-          _id: userId,
+          _id:  new Types.ObjectId(userId),
           'subscription.plan': newSubscription.plan
         },
         {
@@ -101,7 +101,7 @@ export class SubscriptionService {
     }
     const updatedUser = await this.userModel.findById(userId);
     const payload = {
-      id: userId,
+      id:  new Types.ObjectId(userId),
       subscriptionData: newSubscription
     };
     try {
