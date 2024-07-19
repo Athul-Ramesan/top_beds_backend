@@ -106,7 +106,7 @@ export class SubscriptionService {
     };
     try {
       const { data } = await firstValueFrom(
-        this.httpService.post('http://topbeds.smasher.shop/api/auth/update-subscription-data', payload).pipe(
+        this.httpService.post('https://topbeds.smasher.shop/api/auth/update-subscription-data', payload).pipe(
           catchError((error) => {
             throw new SubscriptionUpdateException(`Failed to update subscription: ${error.response?.data?.message || error.message}`);
           })
