@@ -31,7 +31,7 @@ export const updateProfileImageController = (
             const payload = {
                 profileImage: imageUploadedToCloudinary
             }
-            const response = await axios.post(`http://topbeds.smasher.shop/api/auth/update-user-data/${_id}`, payload,
+            const response = await axios.post(`http://topbeds.smasher.shop/api/auth/update-user-data/${_id}`, {payload},
                 {
                     headers:
                     {
