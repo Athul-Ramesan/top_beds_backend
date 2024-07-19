@@ -101,7 +101,8 @@ export class BookingService {
     await this.updatePropertyAvailability(property, startDate, endDate, false)
 
     const user = await this.userModel.findById(booking.user);
-    await this.mailerService.sendBookingConfirmation(booking, user.email);
+    const propertyForSendingMail = await this.propertyModel.findById(booking.property);
+    await this.mailerService.sendBookingConfirmation(booking, user.email, propertyForSendingMail.title);
     try {
       const property = await this.propertyModel.findById(propertyId)
       const { data } = await firstValueFrom(
