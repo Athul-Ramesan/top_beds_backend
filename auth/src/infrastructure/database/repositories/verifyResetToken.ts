@@ -1,5 +1,5 @@
 import { User } from "../models";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 export const verifyResetToken = async(token:string,password:string) => {
 console.log("🚀 ~ verifyResetToken ~ password:", password)

@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 
 export const hashPassword = async (password:string)=>{
     try {
