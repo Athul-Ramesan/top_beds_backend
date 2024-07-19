@@ -12,6 +12,7 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   })
+  
   app.use(cookieParser())
   dotenv.config()
   await app.listen(config.Port.booking);
