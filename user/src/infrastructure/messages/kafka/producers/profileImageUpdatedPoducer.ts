@@ -6,9 +6,10 @@ export const profileImageUpdatedProducer = async (
     image:string
 )=>{
     try {
+        console.log("🚀 ~ image: and Id", image)
 
         
-        console.log(">>>>>>>>>>>>>🔥🔥🔥 producer of user service become host producer");
+        console.log(">>>>>>>>>>>>>🔥🔥🔥 producer of user service updated profileImage producer");
         
         const dataObject = {
             _id : _id,
