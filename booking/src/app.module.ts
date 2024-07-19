@@ -19,13 +19,13 @@ import config from './config';
     BookingModule,
     KafkaModule,
     CronModule,
+    SubscriptionModule,
+    ReviewModule,
+    DashboardModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load:[()=>require('./config')]
     }),
-    SubscriptionModule,
-    ReviewModule,
-    DashboardModule,
   ],
 })
 export class AppModule {}
