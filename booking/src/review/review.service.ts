@@ -48,7 +48,7 @@ export class ReviewService {
     }
     async findByBookingId(bookingId:string):Promise<Review |null>{
         console.log("🚀 ~ ReviewService ~ findByBookingId ~ bookingId:", bookingId)
-        const result = this.reviewModel.findOne({bookingId})
+        const result = this.reviewModel.findOne({bookingId}).exec()
         console.log("🚀 ~ ReviewService ~ findByBookingId ~ result:", result)
         return result
     }
