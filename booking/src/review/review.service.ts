@@ -47,6 +47,8 @@ export class ReviewService {
         return result[0]?.averageRating || 0
     }
     async findByBookingId(bookingId:string):Promise<Review |null>{
+        console.log("🚀 ~ ReviewService ~ findByBookingId ~ bookingId:", bookingId)
+        
         return this.reviewModel.findOne({bookingId})
     }
     async findByUserId (userId:string):Promise<Review[] | null>{
