@@ -2,6 +2,7 @@ import { IDependencies } from "@/application/interfaces/IDependencies"
 import { profileImageUpdatedProducer } from "@/infrastructure/messages/kafka/producers/profileImageUpdatedPoducer"
 import { userStatusUpdatedProducer } from "@/infrastructure/messages/kafka/producers/userStatusUpdated"
 import { addressValidation } from "@/lib/validation/addressValidation"
+import axios from "axios"
 import { NextFunction, Request, Response } from "express"
 import { NotFoundError, customError, uploadSingleImageToCloudinary } from "topbeds-package"
 
@@ -25,6 +26,17 @@ export const updateUserStatusController = (
             if(!result){
                 throw new NotFoundError()
             }
+            const payload = { isBlocked:isBlocked}
+            const response = await axios.patch(`https://topbeds.smasher.shop/api/auth/update-user-data/${userId}`, 
+                {payload}, 
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    withCredentials: true,
+                }
+            );
+                console.log("🚀 ~ response:", response)
                 userStatusUpdatedProducer(userId,isBlocked)
 
             res.status(200).json({status:"ok",data:result,message:"User status Updated"})

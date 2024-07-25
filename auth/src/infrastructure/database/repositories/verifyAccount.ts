@@ -1,5 +1,5 @@
 import { verificationEntity } from "../../../domain/entities";
-import { Otp, User } from "../models";
+import { Otp } from "../models";
 
 
 export const verifyOtpRepository = async (data: verificationEntity): Promise<verificationEntity> => {

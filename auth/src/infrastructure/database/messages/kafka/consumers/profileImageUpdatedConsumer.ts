@@ -1,5 +1,3 @@
-import { IAddress } from "../../../../../domain/entities/IAddress";
-import { User } from "../../../models";
 import { updateProfileImage } from "../../../repositories/user/updateProfileImage";
 
 interface profileImageUpdatedConsumerProps{

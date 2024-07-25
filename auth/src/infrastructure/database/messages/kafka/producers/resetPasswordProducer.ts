@@ -1,5 +1,4 @@
 import { producer } from "..";
-import { UserEntity } from "../../../../../domain/entities";
 
 export default async (
     _id:string,

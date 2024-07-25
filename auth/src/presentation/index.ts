@@ -1,10 +1,10 @@
-import express, { Application, ErrorRequestHandler, NextFunction, Request, Response } from "express"
+import express, { Application, NextFunction, Request, Response } from "express"
 import { config } from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { routes } from "../infrastructure/database/routes"
 import { dependencies } from "../_boot/dependencies"
-import { NotFoundError, customError } from "topbeds-package"
+import { NotFoundError } from "topbeds-package"
 import errorHandler from "../_lib/middleware/errorHandle"
 
 

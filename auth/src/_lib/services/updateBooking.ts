@@ -1,6 +1,6 @@
 import { NotFoundError } from "topbeds-package";
 import { User } from "../../infrastructure/database/models";
-import { IBooking, ISubscription } from "../../domain/entities";
+import { IBooking } from "../../domain/entities";
 
 
 export const updateBooking = async (id: string, booking:IBooking ) => {

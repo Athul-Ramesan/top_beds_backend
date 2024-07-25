@@ -1,4 +1,3 @@
-import { ObjectId } from "mongoose";
 import { IDependencies } from "../interfaces/IDependencies";
 
 export const getUserDataUseCase = (dependencies: IDependencies) => {

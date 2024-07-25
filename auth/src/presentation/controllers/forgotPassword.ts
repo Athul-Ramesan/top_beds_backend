@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../application/interfaces/IDependencies";
 import { customError } from "topbeds-package";
 import { emailValidation } from "../../_lib/validation/emailValidation";
-import { sendPasswordResetEmail } from "../../_lib/verification/sendPasswordResetEmail";
 
 export const forgotPasswordController = (dependencies:IDependencies)=>{
     const {useCases:{emailVerificationUseCase}} = dependencies

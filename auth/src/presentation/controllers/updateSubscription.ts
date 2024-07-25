@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { IDependencies } from "../../application/interfaces/IDependencies";
-import { customError,IUserPayload} from 'topbeds-package'
 import { updateSubscriptionData } from "../../_lib/services/updateSubscriptionData";
 export const updateSubscriptionDataController =async (req: Request, res: Response, next: NextFunction)  => {
 

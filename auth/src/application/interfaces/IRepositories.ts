@@ -1,4 +1,3 @@
-import { ObjectId } from "mongoose";
 import { UserEntity, UserLoginEntity, verificationEntity } from "../../domain/entities";
 
 export interface IRepositories{

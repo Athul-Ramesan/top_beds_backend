@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { dependencies } from "../../_boot/dependencies";
 import { IDependencies } from "../../application/interfaces/IDependencies";
-import { error } from "console";
 import { signupValidation } from "../../_lib/validation";
 import { generateAccesstoken } from "../../_lib/jwt/generateAccesstoken";
 import { generateRefreshToken } from "../../_lib/jwt/generateRefreshToken";

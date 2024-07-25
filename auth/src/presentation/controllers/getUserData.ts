@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../application/interfaces/IDependencies";
-import { customError,IUserPayload} from 'topbeds-package'
+import { IUserPayload} from 'topbeds-package'
 export const getUserDataController = (dependencies: IDependencies) => {
     const { useCases: { getUserDataUseCase } } = dependencies
 

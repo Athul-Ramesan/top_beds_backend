@@ -1,4 +1,3 @@
-import { generateOtp } from "../generateOtp"
 import nodemailer from "nodemailer"
 
 export const generateEmailWithOtp = async (email: string,otp:string) => {

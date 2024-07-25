@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { IDependencies } from "../../application/interfaces/IDependencies";
 import { signupValidation } from "../../_lib/validation";
 import { generateAccesstoken } from "../../_lib/jwt/generateAccesstoken";
-import { UserEntity } from "../../domain/entities";
 import { generateRefreshToken } from "../../_lib/jwt/generateRefreshToken";
 import userCreatedProducer from "../../infrastructure/database/messages/kafka/producers/userCreatedProducer";
 import axios from "axios";

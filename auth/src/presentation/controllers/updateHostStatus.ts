@@ -1,8 +1,4 @@
 import { NextFunction, Request, Response } from "express"
-import { IDependencies } from "../../application/interfaces/IDependencies"
-import { passwordValidation } from "../../_lib/validation"
-import { customError } from "topbeds-package"
-import resetPasswordProducer from "../../infrastructure/database/messages/kafka/producers/resetPasswordProducer"
 import { changeHostStatus } from "../../_lib/services/changeHostStatus"
 
 export const changeHostStatusController =async  (req: Request, res: Response, next: NextFunction)=>{

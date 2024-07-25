@@ -1,4 +1,3 @@
-import mongoose from "mongoose"
 import { UserEntity } from "../../../../domain/entities"
 import { User } from "../../models"
 

@@ -1,9 +1,7 @@
 import { Router } from "express";
 import { IDependencies } from "../../../application/interfaces/IDependencies";
 import { controllers } from "../../../presentation/controllers";
-import { authMiddleware } from "../../../_lib/middleware/auth";
 import {isUserCheck} from 'topbeds-package'
-import { changeHostStatus } from "../../../_lib/services/changeHostStatus";
 import { changeHostStatusController } from "../../../presentation/controllers/updateHostStatus";
 import { updateSubscriptionDataController } from "../../../presentation/controllers/updateSubscription";
 import { updateBookingController } from "../../../presentation/controllers/updateBooking";
