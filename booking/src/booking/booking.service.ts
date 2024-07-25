@@ -47,6 +47,8 @@ export class BookingService {
     if (!isAvailable) {
       throw new HttpException('Property is not available for the selected dates', HttpStatus.NOT_FOUND)
     }
+    const holdExpiresAt = new Date()
+    holdExpiresAt.setMinutes(holdExpiresAt.getMinutes()+10)
 
     const booking = new this.BookingModel({
       property: propertyId,
@@ -54,32 +56,62 @@ export class BookingService {
       startDate,
       endDate,
       guests,
-      totalPrice
+      totalPrice,
+      bookingStatus:'TemporaryHold',
+      holdExpiresAt
     })
+
+    await this.updatePropertyAvailability(property, startDate, endDate, false);
+    try {
+      const property = await this.propertyModel.findById(propertyId)
+      const { data } = await firstValueFrom(
+        this.httpService.patch('http://topbeds.smasher.shop/api/property/update-property-availability', { propertyId: property._id, availability: property.availability }).pipe(
+          catchError((error) => {
+            throw new SubscriptionUpdateException(`Failed to update availability: ${error.response?.data?.message || error.message}`);
+          })
+        )
+      );
+
+    } catch (error) {
+      console.log("🚀 ~ BookingService ~ error:", error)
+      if (error instanceof SubscriptionUpdateException) {
+        throw error;
+      }
+    }
+
     console.log("🚀 ~ BookingService ~ booking:", booking)
     return booking.save()
 
-    // try {
-    //     const response = await axios.patch('http://localhost:5000/property/update-property-availability', 
-    //         {propertyId: property._id, availability: property.availability}, 
-    //         {
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //             withCredentials: true,
-    //         }
-    //     );
+  
+  }
+  async releaseTemporaryHold(bookingId: string): Promise<void> {
+    const booking = await this.BookingModel.findById(bookingId);
+    if (!booking || booking.bookingStatus !== 'TemporaryHold') {
+      throw new NotFoundException('Temporary hold not found');
+    }
+
+    const property = await this.propertyModel.findById(booking.property);
+    const propertyId = property._id
+    await this.updatePropertyAvailability(property, booking.startDate, booking.endDate, true);
+    try {
+      const property = await this.propertyModel.findById(propertyId)
+      const { data } = await firstValueFrom(
+        this.httpService.patch('http://topbeds.smasher.shop/api/property/update-property-availability', { propertyId: property._id, availability: property.availability }).pipe(
+          catchError((error) => {
+            throw new SubscriptionUpdateException(`Failed to update availability: ${error.response?.data?.message || error.message}`);
+          })
+        )
+      );
+
+    } catch (error) {
+      console.log("🚀 ~ BookingService ~ error:", error)
+      if (error instanceof SubscriptionUpdateException) {
+        throw error;
+      }
+    }
 
 
-    //     console.log("🚀 ~ BookingController ~ response:", response.data);
-    // } catch (error) {
-    //     if (axios.isAxiosError(error)) {
-    //         console.error("Axios error:", error.response?.data || error.message);
-    //     } else {
-    //         console.error("Error updating property availability:", error);
-    //     }
-    //     throw new BadRequestException('Failed to update property availability');
-    // }
+    await this.BookingModel.findByIdAndDelete(bookingId);
   }
   async confirmBooking(confirmBookingData) {
     const { propertyId, startDate, endDate, bookingId, session_id } = confirmBookingData
@@ -90,6 +122,12 @@ export class BookingService {
     const bookingDetailsForGetPrice = await this.BookingModel.findById(bookingId)
     const totalPrice = bookingDetailsForGetPrice.totalPrice
     const retrievePayment = await stripeInstance.checkout.sessions.retrieve(session_id)
+
+    if (retrievePayment.payment_status !== 'paid') {
+      await this.releaseTemporaryHold(bookingId);
+      throw new BadRequestException('Payment not completed');
+    }
+
     console.log("🚀 ~ BookingService ~ confirmBooking ~ retrievePayment:", retrievePayment)
     const paymentIntentId = retrievePayment.payment_intent
     console.log("🚀 ~ BookingService ~ confirmBooking ~ paymentIntentId:", paymentIntentId)
@@ -98,27 +136,27 @@ export class BookingService {
     )
     console.log("🚀 ~ BookingService ~ confirmBooking ~ booking:", booking)
 
-    await this.updatePropertyAvailability(property, startDate, endDate, false)
+    // await this.updatePropertyAvailability(property, startDate, endDate, false)
 
     const user = await this.userModel.findById(booking.user);
     const propertyForSendingMail = await this.propertyModel.findById(booking.property);
     await this.mailerService.sendBookingConfirmation(booking, user.email, propertyForSendingMail.title);
-    try {
-      const property = await this.propertyModel.findById(propertyId)
-      const { data } = await firstValueFrom(
-        this.httpService.patch('http://topbeds.smasher.shop/api/property/update-property-availability', { propertyId: property._id, availability: property.availability }).pipe(
-          catchError((error) => {
-            throw new SubscriptionUpdateException(`Failed to update subscription: ${error.response?.data?.message || error.message}`);
-          })
-        )
-      );
+    // try {
+    //   const property = await this.propertyModel.findById(propertyId)
+    //   const { data } = await firstValueFrom(
+    //     this.httpService.patch('http://topbeds.smasher.shop/api/property/update-property-availability', { propertyId: property._id, availability: property.availability }).pipe(
+    //       catchError((error) => {
+    //         throw new SubscriptionUpdateException(`Failed to update subscription: ${error.response?.data?.message || error.message}`);
+    //       })
+    //     )
+    //   );
 
-    } catch (error) {
-      if (error instanceof SubscriptionUpdateException) {
-        throw error;
-      }
-      return booking
-    }
+    // } catch (error) {
+    //   if (error instanceof SubscriptionUpdateException) {
+    //     throw error;
+    //   }
+    //   return booking
+    // }
     return booking
   }
 
@@ -134,7 +172,7 @@ export class BookingService {
         return false; // Unavailable
       }
     }
-    return true; 
+    return true;
   }
 
 
@@ -178,8 +216,8 @@ export class BookingService {
       user: userId,
       startDate: { $gte: currentDate },
     })
-    .sort({ createdAt: -1 })
-    .populate('property').populate('user')
+      .sort({ createdAt: -1 })
+      .populate('property').populate('user')
     console.log("🚀 ~ BookingService ~ getUserBookings ~ upcomingBookings:", upcomingBookings)
     const allBookings = await this.BookingModel.find()
     console.log("🚀 ~ BookingService ~ getUserBookings ~ allBookings:", allBookings)
@@ -188,8 +226,8 @@ export class BookingService {
       user: userId,
       endDate: { $lt: currentDate },
     })
-    .sort({ createdAt: -1 })
-    .populate('property').populate('user')
+      .sort({ createdAt: -1 })
+      .populate('property').populate('user')
     console.log("🚀 ~ BookingService ~ getUserBookings ~ completedBookings:", completedBookings)
 
     return { upcomingBookings, completedBookings };
@@ -210,21 +248,21 @@ export class BookingService {
       property: { $in: propertyIds },
       startDate: { $gte: currentDate },
     })
-    .sort({ createdAt: -1 })
-    .populate('property').populate('user')
+      .sort({ createdAt: -1 })
+      .populate('property').populate('user')
     console.log("🚀 ~ BookingService ~ getHostBookings ~ upcomingBookings:", upcomingBookings)
 
     const completedBookings = await this.BookingModel.find({
       property: { $in: propertyIds },
       endDate: { $lt: currentDate },
     })
-    .sort({ createdAt: -1 })
-    .populate('property').populate('user')
-   
+      .sort({ createdAt: -1 })
+      .populate('property').populate('user')
+
     return { allBookings, upcomingBookings, completedBookings };
   }
   async getBookingById(bookingId: string): Promise<Booking> {
-    const booking = await this.BookingModel.findById( new Types.ObjectId(bookingId.trim())).populate('property').populate('user');
+    const booking = await this.BookingModel.findById(new Types.ObjectId(bookingId.trim())).populate('property').populate('user');
     if (!booking) {
       throw new NotFoundException('Booking not found');
     }

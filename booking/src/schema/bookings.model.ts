@@ -30,9 +30,11 @@ export class Booking {
   @Prop()
   paymentIntentId: string;
 
-  @Prop({ type: String, enum: ['Pending', 'Accepted','Cancelled'], default: 'Pending' })
+  @Prop({ type: String, enum: ['Pending', 'Accepted', 'Cancelled', 'TemporaryHold'], default: 'Pending' })
   bookingStatus: string;
 
+  @Prop({ type: Date })
+  holdExpiresAt: Date;
   // @Prop({type:String, enum:['Pending','Refunded','Requested']})
 
 }
