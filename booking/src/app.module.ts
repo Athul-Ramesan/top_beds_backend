@@ -10,12 +10,14 @@ import { ReviewModule } from './review/review.module';
 import { DashboardController } from './dashboard/dashboard.controller';
 import { DashboardModule } from './dashboard/dashboard.module';
 import config from './config';
+import { ScheduleModule } from '@nestjs/schedule';
 
 
 
 @Module({
   imports: [ 
     MongooseModule.forRoot(config.urls.mongoUrI),
+    ScheduleModule.forRoot(),
     BookingModule,
     KafkaModule,
     CronModule,

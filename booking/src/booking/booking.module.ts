@@ -8,6 +8,7 @@ import { Property, PropertySchema } from 'src/schema/property.model';
 import { User, UserSchema } from 'src/schema/user.model';
 import { HttpModule } from '@nestjs/axios';
 import { MailerService } from 'src/mailer.service';
+import { BookingCleanupService } from 'src/cron.service';
 @Module({
   imports: [MongooseModule.forFeature([
     {
@@ -29,7 +30,7 @@ import { MailerService } from 'src/mailer.service';
   ]),
   HttpModule
 ],
-  providers: [BookingService, MailerService],
+  providers: [BookingService, MailerService, BookingCleanupService],
   controllers: [BookingController]
 })
 export class BookingModule { }
