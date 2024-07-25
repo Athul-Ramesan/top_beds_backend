@@ -27,7 +27,7 @@ export const updateUserStatusController = (
                 throw new NotFoundError()
             }
             const payload = { isBlocked:isBlocked}
-            const response = await axios.patch(`https://topbeds.smasher.shop/api/auth/update-user-data/${userId}`, 
+            const response = await axios.post(`https://topbeds.smasher.shop/api/auth/update-user-data/${userId}`, 
                 {payload}, 
                 {
                     headers: {
