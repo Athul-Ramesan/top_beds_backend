@@ -42,7 +42,7 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/update-property-availability')
             .patch( updateAvailabilityController)   
     router.route('/add-property-facility')
-            .post(isUserCheck,addFacility)   
+            .post(addFacility)   
     router.route('/delete-property-facility/:_id')
             .delete(isUserCheck,requireAdmin, deleteFacility)   
     router.route('/get-property-facility/')
