@@ -55,8 +55,8 @@ export class BookingController {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: 'http://topbeds.vercel.app/user/paymentSuccess/{CHECKOUT_SESSION_ID}',
-            cancel_url: "http://topbeds.vercel.app/user/paymentSuccess"
+            success_url: 'https://topbeds.vercel.app/user/paymentSuccess/{CHECKOUT_SESSION_ID}',
+            cancel_url: "https://topbeds.vercel.app/user/paymentSuccess"
         })
         console.log("🚀 ~ BookingController ~ session:", session)
         let booking: any = {}
