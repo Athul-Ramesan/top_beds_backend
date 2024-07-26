@@ -31,7 +31,7 @@ export const updateProfileImageController = (
             const payload = {
                 profileImage: imageUploadedToCloudinary
             }
-            const response = await axios.post(`http://topbeds.smasher.shop/api/auth/update-user-data/${_id}`, payload,
+            const response = await axios.post(`http://topbeds.smasher.shop/api/auth/update-user-data/${_id}`, {payload},
                 {
                     headers:
                     {
@@ -40,7 +40,7 @@ export const updateProfileImageController = (
                     withCredentials: true
                 })
                 console.log(response, 'update profile image response')
-            const chatResponse = await axios.post(`http://topbeds.smasher.shop/api/chat/update-user-data/${_id}`, payload,
+            const chatResponse = await axios.post(`http://topbeds.smasher.shop/api/chat/update-user-data/${_id}`, {payload},
                 {
                     headers:
                     {
