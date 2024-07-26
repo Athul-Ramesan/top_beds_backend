@@ -55,7 +55,7 @@ spec:
             name: topbeds-chat-service
             port:
               number: 3004
-      - path: /api/socket.io
+      - path: /socket.io
         pathType: Prefix
         backend:
           service:
