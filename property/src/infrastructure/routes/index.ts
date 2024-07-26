@@ -32,7 +32,7 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/delete-property/:id')
         .delete(isUserCheck,deleteProperty)
     router.route('/get-host-properties/:hostId')    
-        .get(isUserCheck, getHostProperties)
+        .get(getHostProperties)
     router.route('/upload-images/:propertyId')
         .post(isUserCheck,requireHost, uploadNewImages)    
     router.route('/update-property/:propertyId')
