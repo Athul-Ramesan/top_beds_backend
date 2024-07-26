@@ -46,7 +46,7 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/delete-property-facility/:_id')
             .delete(isUserCheck,requireAdmin, deleteFacility)   
     router.route('/get-property-facility/')
-            .get(isUserCheck,getAllFacilities)   
+            .get(getAllFacilities)   
     router.route('/search')
             .get(searchProperty)   
              
