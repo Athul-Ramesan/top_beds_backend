@@ -18,7 +18,7 @@ export const routes = (dependencies: IDependencies) => {
         deleteFacility,
         getAllFacilities,
         searchProperty
-     } = controllers(dependencies)
+    } = controllers(dependencies)
     const router = Router()
 
     router.route('/add-property')
@@ -30,26 +30,26 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/get-all-properties')
         .get(getAllProperties)
     router.route('/delete-property/:id')
-        .delete(isUserCheck,deleteProperty)
-    router.route('/get-host-properties/:hostId')    
+        .delete(isUserCheck, deleteProperty)
+    router.route('/get-host-properties/:hostId')
         .get(getHostProperties)
     router.route('/upload-images/:propertyId')
-        .post(isUserCheck,requireHost, uploadNewImages)    
+        .post(isUserCheck, requireHost, uploadNewImages)
     router.route('/update-property/:propertyId')
-        .post(isUserCheck,requireHost, updateProperty)    
-    router.route('/delete-photo')
-            .delete(isUserCheck,requireHost, deletePropertyPhoto)   
-    router.route('/update-property-availability')
-            .patch( updateAvailabilityController)   
+        .post(isUserCheck, requireHost, updateProperty)
     router.route('/add-property-facility')
-            .post(addFacility)   
-    router.route('/delete-property-facility/:_id')
-            .delete(isUserCheck,requireAdmin, deleteFacility)   
+        .post(addFacility)
     router.route('/get-property-facility/')
-            .get(getAllFacilities)   
+        .get(getAllFacilities)
+    router.route('/delete-photo')
+        .delete(isUserCheck, requireHost, deletePropertyPhoto)
+    router.route('/update-property-availability')
+        .patch(updateAvailabilityController)
+    router.route('/delete-property-facility/:_id')
+        .delete(isUserCheck, requireAdmin, deleteFacility)
     router.route('/search')
-            .get(searchProperty)   
-             
+        .get(searchProperty)
+
     return router
 };
 
