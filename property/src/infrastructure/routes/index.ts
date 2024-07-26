@@ -4,7 +4,7 @@ import { updateAvailabilityController } from "@/presentation/controllers/editPro
 
 import { upload } from "@/utils/multer/imageUpload";
 import { Router } from "express";
-import { isUserCheck, requireHost } from "topbeds-package"
+import { isUserCheck, requireAdmin, requireHost } from "topbeds-package"
 
 export const routes = (dependencies: IDependencies) => {
     const { createProperty,
@@ -24,28 +24,29 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/add-property')
         .post(
             isUserCheck,
+            requireHost,
             createProperty
         )
     router.route('/get-all-properties')
         .get(getAllProperties)
     router.route('/delete-property/:id')
-        .delete(deleteProperty)
+        .delete(isUserCheck,deleteProperty)
     router.route('/get-host-properties/:hostId')    
-        .get(getHostProperties)
+        .get(isUserCheck,requireHost, getHostProperties)
     router.route('/upload-images/:propertyId')
-        .post(uploadNewImages)    
+        .post(isUserCheck,requireHost, uploadNewImages)    
     router.route('/update-property/:propertyId')
-        .post(updateProperty)    
+        .post(isUserCheck,requireHost, updateProperty)    
     router.route('/delete-photo')
-            .delete(deletePropertyPhoto)   
+            .delete(isUserCheck,requireHost, deletePropertyPhoto)   
     router.route('/update-property-availability')
-            .patch(updateAvailabilityController)   
+            .patch(isUserCheck,requireHost, updateAvailabilityController)   
     router.route('/add-property-facility')
-            .post(addFacility)   
+            .post(isUserCheck,addFacility)   
     router.route('/delete-property-facility/:_id')
-            .delete(deleteFacility)   
+            .delete(isUserCheck,requireAdmin, deleteFacility)   
     router.route('/get-property-facility/')
-            .get(getAllFacilities)   
+            .get(isUserCheck,getAllFacilities)   
     router.route('/search')
             .get(searchProperty)   
              
