@@ -40,7 +40,7 @@ export const routes = (dependencies: IDependencies) => {
     router.route('/delete-photo')
             .delete(isUserCheck,requireHost, deletePropertyPhoto)   
     router.route('/update-property-availability')
-            .patch(isUserCheck, updateAvailabilityController)   
+            .patch( updateAvailabilityController)   
     router.route('/add-property-facility')
             .post(isUserCheck,addFacility)   
     router.route('/delete-property-facility/:_id')
