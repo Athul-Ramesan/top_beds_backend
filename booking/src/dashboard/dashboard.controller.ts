@@ -21,6 +21,7 @@ export class DashboardController {
     }
     @Get('host-reservations')
     async getHostReservations() {
+        console.log('inside host reservation')
         return this.adminDashboardService.getAllHostsReservationsAndEarnings();
     }
 }

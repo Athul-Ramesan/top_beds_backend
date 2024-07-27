@@ -123,7 +123,7 @@ export class DashboardService {
           },
           { $sort: { totalReservations: -1 } }
         ]);
-    
+        console.log(hostsData, 'host data 👉👉👉👉')
         return hostsData;
       }
 }
