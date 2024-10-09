@@ -8,7 +8,13 @@ import app from "./presentation";
     try{   
         app
         await dbConnection()
-        await runConsumer()
+        await runConsumer().then((result)=>{
+            console.log(result);
+            console.log('kafka is running');
+        }).catch(err=>{
+            console.log(err);
+            console.log('errror in kafka consumer');
+        })
     }catch(error:any){
         console.log(error,"_____failed to config auth-service");
     }finally{
