@@ -8,7 +8,7 @@ export const handleLogin = async (dependencies: IDependencies, req: Request, res
     const { value, error } = loginValidation.validate(req.body);
 
     if (error) {
-        throw new customError("Invalid data" || error.message, 400);
+        throw new customError( error.message || "Invalid data", 400);
     }
 
     const result = await dependencies.useCases.loginUseCase(dependencies).execute({ ...value });
