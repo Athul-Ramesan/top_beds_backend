@@ -32,7 +32,7 @@ export const signupController = (dependencies: IDependencies) => {
             const { value, error } = signupValidation.validate(restValues)
             if (error) {
                 console.log(error.message);
-                throw new Error("Error in validation" || error.message);
+                throw new Error( error.message || "Error in validation" );
             }
             const result = await signupUseCase(dependencies).execute(value)
 
