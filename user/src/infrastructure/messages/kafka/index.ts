@@ -20,7 +20,7 @@ import { Kafka, Producer, Consumer } from "kafkajs";
 
 export const kafka = new Kafka({
   clientId: 'kafka-user-client',
-  brokers: ["54.205.185.57"]
+  brokers: ["54.205.185.57:29092"]
 })
 
 export const producer: Producer = kafka.producer();

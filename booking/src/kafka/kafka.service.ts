@@ -18,7 +18,7 @@ export class KafkaService implements OnModuleInit {
         this.kafka = new Kafka({
             clientId: this.configService.get<string>('kafka-auth-client'),
             brokers: [
-                this.configService.get<string>('54.205.185.57')
+                this.configService.get<string>('54.205.185.57:29092')
             ]
         })
         // this.kafka = new Kafka({
