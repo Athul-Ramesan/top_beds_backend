@@ -37,7 +37,7 @@ app.use(cookieParser());
 // app.get('/',(req:Request, res:Response)=>{
 //     res.status(200).json({message:"<< User service is running ! >>"})
 // })
-app.use("/api/user", routes(dependencies))
+app.use("/", routes(dependencies))
 
 app.all("*", (req:Request,res:Response,next:NextFunction)=>{
 

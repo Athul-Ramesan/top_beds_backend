@@ -6,7 +6,7 @@ import stripe from 'stripe';
 import { Booking } from 'src/schema/bookings.model';
 
 
-@Controller('api/booking')
+@Controller('/')
 export class BookingController {
     constructor(
         private readonly bookingService: BookingService

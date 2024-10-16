@@ -4,7 +4,7 @@ import { CreateSubscriptionPlanDto } from './dto/createSubscriptionPlanDto';
 import { UpdateSubscriptionPlanDto } from './dto/updateSubscriptionPlan.dto';
 import { subscribeDto } from './dto/subscribeDto';
 
-@Controller('api/booking/subscription')
+@Controller('subscription')
 export class SubscriptionController {
 
   constructor(private readonly subscriptionService: SubscriptionService) { }

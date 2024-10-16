@@ -3,7 +3,7 @@ import { ChatService } from './chat.service';
 import { CreateMessageDto } from './dto/createMessageDto';
 import { UserDocument } from './schema/user.model';
 
-@Controller('api/chat')
+@Controller('/')
 export class ChatController {
 
     constructor(private readonly chatService: ChatService) { }

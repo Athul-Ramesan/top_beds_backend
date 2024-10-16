@@ -45,7 +45,7 @@ app.use(express.urlencoded({
 }))
 app.use(cookieParser());
 
-app.use("/api/property", routes(dependencies))
+app.use("/", routes(dependencies))
 app.all("*", (req:Request,res:Response,next:NextFunction)=>{
 
     next(new NotFoundError())

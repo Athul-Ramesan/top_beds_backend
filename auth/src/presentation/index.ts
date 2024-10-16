@@ -26,7 +26,7 @@ app.use(cookieParser());
 // app.get('/',(req:Request, res:Response)=>{
 //     res.status(200).json({message:"<< Auth service is running ! >>"})
 // })
-app.use("/api/auth", routes(dependencies))
+app.use("/", routes(dependencies))
 app.all("*", (req:Request,res:Response,next:NextFunction)=>{
 
     next(new NotFoundError())
