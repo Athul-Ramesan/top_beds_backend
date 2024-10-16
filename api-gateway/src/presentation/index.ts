@@ -7,7 +7,7 @@ import { ROUTES } from "@/Routes";
 
 const app: Application = express()
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://topbeds.vercel.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }
