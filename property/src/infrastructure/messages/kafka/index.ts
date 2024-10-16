@@ -5,24 +5,24 @@ import { Kafka } from "kafkajs";
 //     clientId: "kafka-property-client"
 // });
 
-// const kafka = new Kafka({
-//     clientId: 'kafka-auth-client',
-//     brokers: ['pkc-56d1g.eastus.azure.confluent.cloud:9092'],
-//     ssl: true,
-//     sasl: {
-//         mechanism: 'plain',
-//         username: 'FDL6FCZJATD3XFEP',
-//         password: 'grWiWkJR3eGs5MF3khkpLY2joYN1ESjFdJ9SVUpyOqgYVbI0yUK+Vx2r1GPdjekv',
-//     },
-//     // logLevel: logLevel.DEBUG, // Enable debug level logging
-//     connectionTimeout: 30000,
-//     authenticationTimeout: 30000,
-// });
+const kafka = new Kafka({
+    clientId: 'kafka-auth-client',
+    brokers: ['pkc-4j8dq.southeastasia.azure.confluent.cloud:9092'],
+    ssl: true,
+    sasl: {
+      mechanism: 'plain',
+      username: 'IGI4TMEEZDD5XDZG',
+      password:'KYygx3UkksOGC9+Iur1t5EPU3MlyQfY2qBgJ1zHfxW3leYtYefDoikTYcR8EjsPk',
+    },
+    connectionTimeout: 30000, 
+      authenticationTimeout: 30000, 
+  
+  });
 
-export const kafka = new Kafka({
-    clientId: 'kafka-property-client',
-    brokers: ["54.205.185.57:29092"]
-  })
+// export const kafka = new Kafka({
+//     clientId: 'kafka-property-client',
+//     brokers: ["54.205.185.57:29092"]
+//   })
 
 export const producer = kafka.producer();
 export const consumer = kafka.consumer({

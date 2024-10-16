@@ -15,12 +15,12 @@ export class KafkaService implements OnModuleInit {
         @InjectModel(User.name) private userModel: Model<UserDocument>,
         @InjectModel(Property.name) private propertyModel: Model<PropertyDocument>
     ) {
-        this.kafka = new Kafka({
-            clientId: this.configService.get<string>('kafka-auth-client'),
-            brokers: [
-                this.configService.get<string>('54.205.185.57:29092')
-            ]
-        })
+        // this.kafka = new Kafka({
+        //     clientId: this.configService.get<string>('kafka-auth-client'),
+        //     brokers: [
+        //         this.configService.get<string>('54.205.185.57:29092')
+        //     ]
+        // })
         // this.kafka = new Kafka({
         //     clientId: 'kafka-auth-client',
         //     brokers: ['pkc-56d1g.eastus.azure.confluent.cloud:9092'],
@@ -34,6 +34,19 @@ export class KafkaService implements OnModuleInit {
         //     connectionTimeout: 30000,
         //     authenticationTimeout: 30000,
         // });
+        this.kafka = new Kafka({
+            clientId: 'kafka-booking-client',
+            brokers: ['pkc-4j8dq.southeastasia.azure.confluent.cloud:9092'],
+            ssl: true,
+            sasl: {
+              mechanism: 'plain',
+              username: 'IGI4TMEEZDD5XDZG',
+              password:'KYygx3UkksOGC9+Iur1t5EPU3MlyQfY2qBgJ1zHfxW3leYtYefDoikTYcR8EjsPk',
+            },
+            connectionTimeout: 30000, 
+              authenticationTimeout: 30000, 
+          
+          });
     }
     async onModuleInit() {
         this.consumer = this.kafka.consumer({
