@@ -20,17 +20,18 @@ const PORT: number = Number(process.env.PORT)
 //     credentials: true,
 // }
 // app.use(cors(corsOptions));
-const corsOptions = {
-    origin: 'https://topbeds.vercel.app',
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-};
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: 'https://topbeds.vercel.app',
+//     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+//     credentials: true,
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+// };
+
+// app.use(cors(corsOptions));
 
 // Preflight request handling
-app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
 
 app.use(express.json(
     { limit: '100mb' }
